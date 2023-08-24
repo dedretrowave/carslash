@@ -23,11 +23,15 @@ namespace Enemies.Presenter
             _view.Follow(player);
 
             _view.OnCollide += OnCollision;
+            _view.OnDamage += TakeDamage;
+            _model.OnOutOfHealth += Destroy;
         }
 
         private void Disable()
         {
             _view.OnCollide -= OnCollision;
+            _view.OnDamage -= TakeDamage;
+            _model.OnOutOfHealth -= Destroy;
         }
 
         private void OnCollision(Transform collider)
@@ -38,7 +42,12 @@ namespace Enemies.Presenter
         public void Destroy()
         {
             Disable();
-            Object.Destroy(_view.gameObject);
+            _view.Destroy();
+        }
+
+        public void TakeDamage(float amount)
+        {
+            _model.ReduceHealth(amount);
         }
     }
 }

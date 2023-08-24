@@ -4,9 +4,9 @@ namespace Enemies.Model
 {
     public class EnemyModel
     {
-        private int _health;
+        private float _health;
 
-        public int Health => _health;
+        public float Health => _health;
 
         public Action OnOutOfHealth;
 
@@ -15,9 +15,9 @@ namespace Enemies.Model
             _health = maxHealth;
         }
 
-        public void ReduceHealth(int amount)
+        public void ReduceHealth(float amount)
         {
-            int newHealth = _health - amount;
+            float newHealth = _health - amount;
 
             if (newHealth <= 0)
             {

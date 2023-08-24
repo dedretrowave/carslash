@@ -9,15 +9,11 @@ namespace Enemies.View
         [SerializeField] private Transform _explosionPrefab;
 
         private float _tweenSpeed = 10f;
-        private const float TurnSpeed = .3f;
         private Transform _followTarget;
 
-        public event Action<Transform> OnCollide;
+        public Action<float> OnDamage;
 
-        public void Init(int moveSpeed)
-        {
-            _tweenSpeed = moveSpeed;
-        }
+        public event Action<Transform> OnCollide;
 
         public void Follow(Transform target)
         {
@@ -27,6 +23,16 @@ namespace Enemies.View
         private void OnTriggerEnter(Collider other)
         {
             OnCollide?.Invoke(other.transform);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            OnDamage?.Invoke(damage);
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
 
         private void FixedUpdate()
