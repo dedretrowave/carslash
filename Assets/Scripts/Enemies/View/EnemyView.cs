@@ -11,9 +11,10 @@ namespace Enemies.View
         private float _tweenSpeed = 10f;
         private Transform _followTarget;
 
-        public Action<float> OnDamage;
+        public event Action<float> OnDamage;
 
         public event Action<Transform> OnCollide;
+        public event Action<EnemyView> OnDestroy;
 
         public void Follow(Transform target)
         {
@@ -32,6 +33,8 @@ namespace Enemies.View
 
         public void Destroy()
         {
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            OnDestroy?.Invoke(this);
             Destroy(gameObject);
         }
 

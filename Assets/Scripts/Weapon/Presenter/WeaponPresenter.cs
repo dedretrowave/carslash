@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Enemies.View;
 using UnityEngine;
-using Weapon.Arms.Base;
 using Weapon.Views;
 
 namespace Weapon.Presenter
@@ -9,26 +8,27 @@ namespace Weapon.Presenter
     public class WeaponPresenter
     {
         private WeaponView _view;
-
-        private Transform _nearestEnemy;
-        private float _nearestEnemyDistance;
+        
         private Arms.Base.Arms _arms;
+
+        private int _enemiesInRange;
+        private bool _isFiring;
 
         public WeaponPresenter(WeaponView view)
         {
             _view = view;
 
-            _view.OnEnemyInRange += SetNearestEnemy;
-
-            FireContinuously();
+            _view.OnEnemyInRange += OnEnemyInRange;
+            _view.OnEnemyOutOfRange += OnEnemyOutOfRange;
         }
 
         public void Disable()
         {
             _arms = null;
-            _nearestEnemy = null;
+            _isFiring = false;
 
-            _view.OnEnemyInRange -= SetNearestEnemy;
+            _view.OnEnemyInRange -= OnEnemyInRange;
+            _view.OnEnemyOutOfRange -= OnEnemyOutOfRange;
         }
 
         public void SetArms(Arms.Base.Arms arms)
@@ -36,31 +36,38 @@ namespace Weapon.Presenter
             _arms = arms;
         }
 
-        private void SetNearestEnemy(EnemyView enemy)
+        private void OnEnemyInRange(EnemyView enemyView)
         {
-            if (_nearestEnemy == null
-                || _nearestEnemyDistance 
-                >= Vector3.Distance(enemy.transform.position, _view.Position))
+            _enemiesInRange++;
+            enemyView.OnDestroy += OnEnemyOutOfRange;
+
+            if (_enemiesInRange > 0 && !_isFiring)
             {
-                SetEnemy(enemy.transform);
-                FireContinuously();
+                Fire();
             }
         }
 
-        private async void FireContinuously()
+        private void OnEnemyOutOfRange(EnemyView enemyView)
         {
-            while (_nearestEnemy != null 
-                   && _arms != null)
+            _enemiesInRange--;
+            enemyView.OnDestroy -= OnEnemyOutOfRange;
+
+            if (_enemiesInRange == 0)
             {
-                _view.Launch(_nearestEnemy.position, _arms);
-                await Task.Delay(2000);
+                _isFiring = false;
             }
         }
 
-        private void SetEnemy(Transform enemy)
+        private async void Fire()
         {
-            _nearestEnemy = enemy;
-            _nearestEnemyDistance = Vector3.Distance(_view.Position, _nearestEnemy.position);
+            while (_enemiesInRange > 0 || _isFiring)
+            {
+                if (_view == null) return;
+                
+                _isFiring = true;
+                _view.Launch(Vector3.back, _arms);
+                await Task.Delay(_arms.DelayBetweenShots);
+            }
         }
     }
 }

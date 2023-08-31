@@ -2,7 +2,6 @@ using System;
 using Enemies.Model;
 using Enemies.View;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Enemies.Presenter
 {

@@ -1,15 +1,13 @@
 using System;
 using Enemies.View;
 using UnityEngine;
-using Weapon.Arms.Base;
 
 namespace Weapon.Views
 {
     public class WeaponView : MonoBehaviour
     {
-        public Vector3 Position => transform.position;
-
-        public Action<EnemyView> OnEnemyInRange;
+        public event Action<EnemyView> OnEnemyInRange;
+        public event Action<EnemyView> OnEnemyOutOfRange;
 
         public void Launch(Vector3 direction, Arms.Base.Arms arms)
         {
@@ -22,6 +20,12 @@ namespace Weapon.Views
         {
             if (!other.TryGetComponent(out EnemyView enemy)) return;
             OnEnemyInRange?.Invoke(enemy);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.TryGetComponent(out EnemyView enemy)) return;
+            OnEnemyOutOfRange?.Invoke(enemy);
         }
     }
 }

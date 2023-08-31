@@ -5,8 +5,8 @@ namespace Player.Movement.View
 {
     public class MovementView : MonoBehaviour
     {
-        [SerializeField] private float _tweenMoveSpeed;
-        [SerializeField] private float _tweenTurnSpeed;
+        private const float TweenMoveSpeed = 1;
+        private const float TweenTurnSpeed = .3f;
         
         private Vector3 _direction;
         private float _speed;
@@ -23,8 +23,8 @@ namespace Player.Movement.View
 
             if (Vector3.Distance(transform.position, movement) <= 1f) return;
             
-            transform.DOMove(movement, _tweenMoveSpeed);
-            transform.DOLookAt(movement, _tweenTurnSpeed);
+            transform.DOMove(movement, TweenMoveSpeed);
+            transform.DOLookAt(movement, TweenTurnSpeed);
         }
     }
 }

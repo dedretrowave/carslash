@@ -10,7 +10,7 @@ namespace Player.Health.Model
 
         public int Count => _count;
 
-        public Action OnOutOfHealth;
+        public event Action OnOutOfHealth;
 
         public HealthModel(int defaultCount, int maxCount = 10)
         {

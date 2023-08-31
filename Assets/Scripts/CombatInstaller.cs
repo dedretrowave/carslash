@@ -68,10 +68,9 @@ public class CombatInstaller : MonoBehaviour
 
     private void OnEnemyAttack(Transform collision, EnemyPresenter enemy)
     {
-        enemy.OnCollide -= OnEnemyAttack;
-
         if (collision.Equals(_player))
         {
+            enemy.OnCollide -= OnEnemyAttack;
             enemy.Destroy();
             _health.Reduce();
         }

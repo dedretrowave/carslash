@@ -8,7 +8,7 @@ namespace Enemies.Model
 
         public float Health => _health;
 
-        public Action OnOutOfHealth;
+        public event Action OnOutOfHealth;
 
         public EnemyModel(int maxHealth = 10)
         {
