@@ -1,5 +1,5 @@
 using System;
-using DG.Tweening;
+using Economics.Money;
 using UnityEngine;
 
 namespace Enemies.View
@@ -7,6 +7,7 @@ namespace Enemies.View
     public class EnemyView : MonoBehaviour
     {
         [SerializeField] private Transform _explosionPrefab;
+        [SerializeField] private MoneySpawner _moneySpawner;
 
         private float _tweenSpeed = 10f;
         private Transform _followTarget;
@@ -33,6 +34,7 @@ namespace Enemies.View
 
         public void Destroy()
         {
+            _moneySpawner.Spawn();
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             OnDestroy?.Invoke(this);
             Destroy(gameObject);
