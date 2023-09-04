@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Economics.Wallet.View
 {
