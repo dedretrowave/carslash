@@ -9,6 +9,8 @@ namespace Weapon.Arms.Projectile
         
         [SerializeField] private int _speed;
         [SerializeField] private int _damage;
+        [SerializeField] private float _travelEdgeX = 200; 
+        [SerializeField] private float _travelEdgeZ = 200; 
 
         private Vector3 _direction;
 
@@ -28,6 +30,14 @@ namespace Weapon.Arms.Projectile
 
         private void FixedUpdate()
         {
+            if (transform.position.x >= _travelEdgeX 
+                || transform.position.x <= -_travelEdgeX
+                || transform.position.z >= _travelEdgeZ 
+                || transform.position.z <= -_travelEdgeZ)
+            {
+                Destroy(gameObject);
+            }
+            
             transform.position += _direction * _speed * Time.deltaTime;
             transform.LookAt(transform.position + _direction);
         }

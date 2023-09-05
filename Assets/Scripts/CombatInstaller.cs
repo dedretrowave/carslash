@@ -4,7 +4,9 @@ using Enemies.Presenter;
 using Player.Health.Presenter;
 using Player.Health.View;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapon.Arms;
+using Weapon.Arms.Base;
 using Weapon.Views;
 
 public class CombatInstaller : MonoBehaviour
@@ -12,7 +14,7 @@ public class CombatInstaller : MonoBehaviour
     [Header("Components")]
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Transform _player;
-    [SerializeField] private RocketLauncher _rocket;
+    [SerializeField] private Arms _defaultArms;
     [Header("Views")]
     [SerializeField] private HealthView _healthView;
     [SerializeField] private WeaponContainer _weapon;
@@ -27,7 +29,7 @@ public class CombatInstaller : MonoBehaviour
     {
         _health = new(_healthView);
 
-        _weapon.Deploy(_rocket);
+        _weapon.Deploy(_defaultArms);
 
         StartEnemySpawn();
     }

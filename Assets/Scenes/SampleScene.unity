@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawner: {fileID: 1205282693}
   _player: {fileID: 602197686}
-  _rocket: {fileID: 790825111566844470, guid: 5f3e2bb9b7f52e544a0da85debb2f9d2, type: 3}
+  _defaultArms: {fileID: 3471266365613095292, guid: dd057d41439d50f47a8e3905ec30349e, type: 3}
   _healthView: {fileID: 578767280}
   _weapon: {fileID: 977241929}
   _enemiesSpawnTimeSpan: 2

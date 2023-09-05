@@ -6,26 +6,19 @@ namespace Weapon.Arms
 {
     public class RocketLauncher : Base.Arms
     {
-        [SerializeField] private Projectile.Projectile _projectile;
         [SerializeField] private Collider _enemyDetectionCollider;
-
+        
         private EnemyView _selectedEnemy;
-        private Coroutine _shootingRoutine;
 
-        private void StartShooting()
-        {
-            _shootingRoutine = StartCoroutine(Shoot());
-        }
-
-        private IEnumerator Shoot()
+        protected override IEnumerator Shoot()
         {
             _enemyDetectionCollider.enabled = true;
             
             if (_selectedEnemy == null)
             {
                 _enemyDetectionCollider.enabled = true;
-                StopCoroutine(_shootingRoutine);
-                _shootingRoutine = null;
+                StopCoroutine(shootingRoutine);
+                shootingRoutine = null;
                 yield break;
             }
 
@@ -33,8 +26,8 @@ namespace Weapon.Arms
             
             Vector3 shootingDirection = Vector3.Normalize(_selectedEnemy.transform.position - transform.position);
             
-            Projectile.Projectile projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
-            projectile.SetDirection(shootingDirection);
+            Projectile.Projectile spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+            spawnedProjectile.SetDirection(shootingDirection);
             _selectedEnemy = null;
 
             yield return new WaitForSeconds(delayBetweenShotsInSecs);
@@ -47,7 +40,7 @@ namespace Weapon.Arms
 
             _selectedEnemy = enemy;
 
-            if (_shootingRoutine == null)
+            if (shootingRoutine == null)
             {
                 StartShooting();
             }
