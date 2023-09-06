@@ -12,10 +12,9 @@ namespace Enemies.View
         private float _tweenSpeed = 10f;
         private Transform _followTarget;
 
-        public event Action<float> OnDamage;
+        public event Action<float> Damage;
 
-        public event Action<Transform> OnCollide;
-        public event Action<EnemyView> OnDestroy;
+        public event Action<Transform> Collide;
 
         public void Follow(Transform target)
         {
@@ -24,19 +23,18 @@ namespace Enemies.View
 
         private void OnTriggerEnter(Collider other)
         {
-            OnCollide?.Invoke(other.transform);
+            Collide?.Invoke(other.transform);
         }
 
         public void TakeDamage(float damage)
         {
-            OnDamage?.Invoke(damage);
+            Damage?.Invoke(damage);
         }
 
         public void Destroy()
         {
             _moneySpawner.Spawn();
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            OnDestroy?.Invoke(this);
             Destroy(gameObject);
         }
 

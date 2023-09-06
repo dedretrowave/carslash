@@ -4,8 +4,6 @@ using Enemies.Presenter;
 using Player.Health.Presenter;
 using Player.Health.View;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Weapon.Arms;
 using Weapon.Arms.Base;
 using Weapon.Views;
 
@@ -45,7 +43,7 @@ public class CombatInstaller : MonoBehaviour
         _enemiesSpawnRoutine = StartCoroutine(SpawnEnemiesContinuously());
     }
 
-    private void StopEnemySpawn()
+    public void StopEnemySpawn()
     {
         if (_enemiesSpawnRoutine != null)
         {
@@ -57,7 +55,7 @@ public class CombatInstaller : MonoBehaviour
     {
         EnemyPresenter enemy = _enemySpawner.Spawn();
         
-        enemy.OnCollide += OnEnemyAttack;
+        enemy.Collide += OnEnemyAttack;
 
         yield return new WaitForSeconds(_enemiesSpawnTimeSpan);
 
@@ -68,7 +66,7 @@ public class CombatInstaller : MonoBehaviour
     {
         if (collision.Equals(_player))
         {
-            enemy.OnCollide -= OnEnemyAttack;
+            enemy.Collide -= OnEnemyAttack;
             enemy.Destroy();
             _health.Reduce();
         }

@@ -14,7 +14,7 @@ namespace Economics.Wallet.View
         private const float MoneyTweenSpeedInSecs = .3f;
         private const int MoneyDestroyDelayInMilliSecs = 400;
 
-        public event Action OnPickup;
+        public event Action Pickup;
 
         public void SetMoney(int amount)
         {
@@ -35,7 +35,7 @@ namespace Economics.Wallet.View
             other.transform.SetParent(transform);
             other.transform.DOLocalMove(Vector3.zero, MoneyTweenSpeedInSecs);
             DestroyMoney(other);
-            OnPickup?.Invoke();
+            Pickup?.Invoke();
         }
     }
 }

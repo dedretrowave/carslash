@@ -8,7 +8,7 @@ namespace Enemies.Model
 
         public float Health => _health;
 
-        public event Action OnOutOfHealth;
+        public event Action OutOfHealth;
 
         public EnemyModel(int maxHealth = 10)
         {
@@ -21,7 +21,7 @@ namespace Enemies.Model
 
             if (newHealth <= 0)
             {
-                OnOutOfHealth?.Invoke();
+                OutOfHealth?.Invoke();
                 _health = 0;
                 return;
             }

@@ -11,7 +11,7 @@ namespace Enemies.Presenter
         
         private EnemyView _view;
 
-        public event Action<Transform, EnemyPresenter> OnCollide;
+        public event Action<Transform, EnemyPresenter> Collide;
 
         public EnemyPresenter(EnemyView view, Transform player)
         {
@@ -21,21 +21,21 @@ namespace Enemies.Presenter
             
             _view.Follow(player);
 
-            _view.OnCollide += OnCollision;
-            _view.OnDamage += TakeDamage;
-            _model.OnOutOfHealth += Destroy;
+            _view.Collide += OnCollision;
+            _view.Damage += TakeDamage;
+            _model.OutOfHealth += Destroy;
         }
 
         private void Disable()
         {
-            _view.OnCollide -= OnCollision;
-            _view.OnDamage -= TakeDamage;
-            _model.OnOutOfHealth -= Destroy;
+            _view.Collide -= OnCollision;
+            _view.Damage -= TakeDamage;
+            _model.OutOfHealth -= Destroy;
         }
 
         private void OnCollision(Transform collider)
         {
-            OnCollide?.Invoke(collider, this);
+            Collide?.Invoke(collider, this);
         }
 
         public void Destroy()

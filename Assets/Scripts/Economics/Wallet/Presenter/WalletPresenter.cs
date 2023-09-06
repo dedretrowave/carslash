@@ -1,3 +1,4 @@
+using System;
 using Economics.Wallet.Model;
 using Economics.Wallet.View;
 
@@ -9,6 +10,8 @@ namespace Economics.Wallet.Presenter
 
         private WalletView _view;
 
+        public event Action<int> MoneyIncrease;
+
         public WalletPresenter(WalletView view)
         {
             _view = view;
@@ -17,18 +20,19 @@ namespace Economics.Wallet.Presenter
             
             _view.SetMoney(_model.Amount);
 
-            _view.OnPickup += OnPickup;
+            _view.Pickup += OnPickup;
         }
 
         ~WalletPresenter()
         {
-            _view.OnPickup -= OnPickup;
+            _view.Pickup -= OnPickup;
         }
 
         private void OnPickup()
         {
             _model.Add();
             _view.SetMoney(_model.Amount);
+            MoneyIncrease?.Invoke(1);
         }
     }
 }
