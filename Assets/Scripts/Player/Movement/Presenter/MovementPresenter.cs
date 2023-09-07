@@ -17,6 +17,12 @@ namespace Player.Movement.Presenter
             _view = view;
         }
 
+        public void IncreaseMoveSpeed(float amount)
+        {
+            float delimiter = 100f;
+            _model.SetMoveSpeed(_model.MoveSpeed + _model.MoveSpeed * amount / delimiter);
+        }
+
         public void Move(Vector3 direction)
         {
             _view.Move(

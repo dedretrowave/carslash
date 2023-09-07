@@ -22,7 +22,14 @@ namespace LevelProgression.Progression.Presenter
 
         public void IncreaseMoney(int amount = 1)
         {
+            if (_model.LevelIsPassed) return;
+            
             _model.IncreaseMoney(amount);
+
+            if (_model.LevelIsPassed)
+            {
+                LevelPassed?.Invoke();
+            }
         }
     }
 }

@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94219095724f417da52e07c7c052bbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 9181854175651811426, guid: 7d066368a6c77ea45942738121a3a2fe, type: 3}
   delayBetweenShotsInSecs: 2
-  _projectile: {fileID: 9181854175651811426, guid: 7d066368a6c77ea45942738121a3a2fe, type: 3}
   _enemyDetectionCollider: {fileID: 2356250741126083201}
 --- !u!135 &2356250741126083201
 SphereCollider:

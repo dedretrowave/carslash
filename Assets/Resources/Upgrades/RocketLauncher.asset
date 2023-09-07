@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e1d12eefab4dceaf9b59f3fdd34f2b, type: 3}
+  m_Name: RocketLauncher
+  m_EditorClassIdentifier: 
+  _color: {r: 0.013349922, g: 0.9433962, b: 0.051300555, a: 1}
+  _name: "\u0411\u0430\u0437\u0443\u043A\u0430"
+  _descriptionBase: "\u0414\u0430\u0451\u0442 \u0411\u0430\u0437\u0443\u043A\u0443"
+  _newArms: {fileID: 790825111566844470, guid: 5f3e2bb9b7f52e544a0da85debb2f9d2, type: 3}

@@ -132,5 +132,5 @@ MonoBehaviour:
   delayBetweenShotsInSecs: 2
   _minProjectilesAmount: 5
   _maxProjectilesAmount: 10
-  _shootingSpread: 0.5
+  _shootingSpread: 0.3
   _shootingRate: 20
