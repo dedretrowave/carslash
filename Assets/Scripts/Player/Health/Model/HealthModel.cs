@@ -11,7 +11,7 @@ namespace Player.Health.Model
         public int Count => _count;
         public int MaxCount => _maxCount;
 
-        public event Action OnOutOfHealth;
+        public event Action OutOfHealth;
 
         public HealthModel(int defaultCount, int maxCount = 5)
         {
@@ -45,7 +45,7 @@ namespace Player.Health.Model
             {
                 Debug.Log("OUT OF HEALTH");
                 _count = 0;
-                OnOutOfHealth?.Invoke();
+                OutOfHealth?.Invoke();
                 return;
             }
 

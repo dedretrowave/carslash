@@ -19,7 +19,11 @@ namespace Scenes
 
             _levelProgression.UpgradeReceived += _combat.OnUpgrade;
             _levelProgression.UpgradeReceived += _player.OnUpgrade;
-            _levelProgression.LevelPassed += _combat.StopEnemySpawn;
+            _levelProgression.LevelEnded += _combat.ClearEnemies;
+            _levelProgression.NewLevelStarted += _combat.OnNewLevelStarted;
+
+            _combat.OutOfHealth += _player.Disable;
+            _combat.OutOfHealth += _levelProgression.OnLose;
         }
 
         private void OnDisable()
@@ -30,7 +34,8 @@ namespace Scenes
 
             _levelProgression.UpgradeReceived -= _combat.OnUpgrade;
             _levelProgression.UpgradeReceived -= _player.OnUpgrade;
-            _levelProgression.LevelPassed -= _combat.StopEnemySpawn;
+            _levelProgression.LevelEnded -= _combat.ClearEnemies;
+            _levelProgression.NewLevelStarted -= _combat.OnNewLevelStarted;
         }
     }
 }

@@ -7,6 +7,8 @@ namespace Combat.Weapon.Arms.Base
     {
         [SerializeField] protected Projectile.Projectile projectile;
         [SerializeField] protected int delayBetweenShotsInSecs = 2;
+
+        protected float baseDamageIncrease = 1;
         
         protected Coroutine shootingRoutine;
         
@@ -16,6 +18,11 @@ namespace Combat.Weapon.Arms.Base
             
             StopCoroutine(shootingRoutine);
             shootingRoutine = null;
+        }
+
+        public void SetDamageIncrease(float amount)
+        {
+            baseDamageIncrease = amount;
         }
 
         protected void StartShooting()

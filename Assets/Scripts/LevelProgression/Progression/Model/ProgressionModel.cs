@@ -21,6 +21,7 @@ namespace LevelProgression.Progression.Model
         public void IncreaseLevel()
         {
             _currentLevel++;
+            _moneyToIncreaseLevel *= _currentLevel;
             _levelIsPassed = false;
         }
 

@@ -24,11 +24,13 @@ namespace Combat
         [SerializeField] private HealthView _healthView;
         [SerializeField] private WeaponContainer _weapon;
         [Header("Parameters")]
-        [SerializeField] private float _enemiesSpawnTimeSpan;
+        [SerializeField] private float _enemiesSpawnTimeSpan = 5;
 
         private HealthPresenter _health;
 
         private bool _canSpawn;
+
+        public event Action OutOfHealth;
 
         public void Construct()
         {
@@ -38,11 +40,15 @@ namespace Combat
             _weapon.Deploy(_defaultArms[1]);
 
             StartEnemySpawn();
+
+            _health.OutOfHealth += OnOutOfHealth;
         }
 
         public void Disable()
         {
-
+            _health.OutOfHealth -= OnOutOfHealth;
+            
+            _health.Disable();
         }
 
         public void OnUpgrade(Upgrade upgrade)
@@ -60,7 +66,7 @@ namespace Combat
                     switch (propertyUpgrade.Type)
                     {
                         case UpgradeType.Damage:
-                            Debug.Log($"INCREASED DAMAGE ON {propertyUpgrade.IncreaseAmount}%");
+                            _weapon.IncreaseBaseDamage(propertyUpgrade.IncreaseAmount);
                             break;
                         case UpgradeType.HealthAmount:
                             _health.Add((int)propertyUpgrade.IncreaseAmount);
@@ -78,14 +84,34 @@ namespace Combat
             }
         }
 
-        public void StartEnemySpawn()
+        private void OnOutOfHealth()
+        {
+            OutOfHealth?.Invoke();
+            Disable();
+        }
+
+        public void OnNewLevelStarted(int levelIndex)
+        {
+            float enemySpawnTimeCut = levelIndex * .2f;
+            _enemiesSpawnTimeSpan -= enemySpawnTimeCut;
+            
+            StartEnemySpawn();
+        }
+
+        public void ClearEnemies()
+        {
+            StopEnemySpawn();
+            _enemySpawner.Clear();
+        }
+
+        private void StartEnemySpawn()
         {
             if (!_canSpawn) _canSpawn = true;
         
             StartCoroutine(SpawnEnemiesContinuously());
         }
 
-        public void StopEnemySpawn()
+        private void StopEnemySpawn()
         {
             if (_canSpawn) _canSpawn = false;
         }

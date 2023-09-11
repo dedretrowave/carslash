@@ -18,7 +18,7 @@ namespace LevelProgression
         private WalletPresenter _wallet;
         private ProgressionPresenter _progression;
 
-        public event Action LevelPassed;
+        public event Action LevelEnded;
         public event Action<Upgrade> UpgradeReceived;
         public event Action<int> NewLevelStarted;
 
@@ -40,6 +40,11 @@ namespace LevelProgression
             _upgrades.Selected -= OnUpgradeSelected;
         }
 
+        public void OnLose()
+        {
+            Debug.Log("LOSE(");
+        }
+
         private void OnUpgradeSelected(Upgrade upgrade)
         {
             UpgradeReceived?.Invoke(upgrade);
@@ -49,7 +54,7 @@ namespace LevelProgression
 
         private void OnLevelPassed()
         {
-            LevelPassed?.Invoke();
+            LevelEnded?.Invoke();
             _upgrades.Show();
         }
     }

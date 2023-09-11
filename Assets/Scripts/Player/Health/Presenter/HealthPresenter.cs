@@ -1,3 +1,4 @@
+using System;
 using Player.Health.Model;
 using Player.Health.View;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace Player.Health.Presenter
 
         private HealthView _view;
 
+        public event Action OutOfHealth;
+
         public HealthPresenter(HealthView view)
         {
             _model = new(5);
@@ -17,6 +20,17 @@ namespace Player.Health.Presenter
             _view = view;
             
             _view.DrawAndFill(_model.Count, _model.MaxCount);
+            _model.OutOfHealth += OnOutOfHealth;
+        }
+
+        public void Disable()
+        {
+            _model.OutOfHealth -= OnOutOfHealth;
+        }
+
+        private void OnOutOfHealth()
+        {
+            OutOfHealth?.Invoke();
         }
 
         public void Regen(int count = 1)

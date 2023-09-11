@@ -7,12 +7,17 @@ namespace Combat.Weapon.Arms.Projectile
     {
         [SerializeField] private Transform _impactPrefab;
         
-        [SerializeField] private int _speed;
-        [SerializeField] private int _damage;
+        [SerializeField] private float _speed;
+        [SerializeField] private float _damage;
         [SerializeField] private float _travelEdgeX = 200; 
         [SerializeField] private float _travelEdgeZ = 200; 
 
         private Vector3 _direction;
+
+        public void IncreaseDamage(float amount)
+        {
+            _damage *= amount;
+        }
 
         public void SetDirection(Vector3 direction)
         {
@@ -23,6 +28,7 @@ namespace Combat.Weapon.Arms.Projectile
         {
             if (!other.transform.TryGetComponent(out EnemyView enemy)) return;
             
+            Debug.Log(_damage);
             enemy.TakeDamage(_damage);
             Instantiate(_impactPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);

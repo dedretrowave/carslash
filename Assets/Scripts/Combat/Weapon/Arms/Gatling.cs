@@ -28,7 +28,10 @@ namespace Combat.Weapon.Arms
                 
                 global::Combat.Weapon.Arms.Projectile.Projectile spawnedProjectile = 
                     Instantiate(projectile, transform.position, transform.rotation);
+                
                 spawnedProjectile.SetDirection(shootingDirection);
+                spawnedProjectile.IncreaseDamage(baseDamageIncrease);
+                
                 yield return new WaitForSeconds(1 / _shootingRate);
             }
 

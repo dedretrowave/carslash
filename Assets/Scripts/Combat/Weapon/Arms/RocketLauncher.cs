@@ -27,7 +27,10 @@ namespace Combat.Weapon.Arms
             Vector3 shootingDirection = Vector3.Normalize(_selectedEnemy.transform.position - transform.position);
             
             global::Combat.Weapon.Arms.Projectile.Projectile spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+            
             spawnedProjectile.SetDirection(shootingDirection);
+            spawnedProjectile.IncreaseDamage(baseDamageIncrease);
+            
             _selectedEnemy = null;
 
             yield return new WaitForSeconds(delayBetweenShotsInSecs);
