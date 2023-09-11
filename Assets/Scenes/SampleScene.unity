@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87ed03020a84e948e36c39d20bad962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heart: {fileID: 2995719977823031496, guid: e77ef587b6a76bf4d9fb94f114ff50b3, type: 3}
+  _heartPrefab: {fileID: 138825781224108013, guid: e77ef587b6a76bf4d9fb94f114ff50b3, type: 3}
   _layout: {fileID: 1336817518}
 --- !u!1 &593683845
 GameObject:

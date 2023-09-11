@@ -20,7 +20,7 @@ namespace LevelProgression
 
         public event Action LevelPassed;
         public event Action<Upgrade> UpgradeReceived;
-        public event Action<int> NewLevelStarted; 
+        public event Action<int> NewLevelStarted;
 
         public void Construct()
         {

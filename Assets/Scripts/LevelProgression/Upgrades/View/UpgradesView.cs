@@ -43,6 +43,8 @@ namespace LevelProgression.Upgrades.View
                 upgradeUi.Clicked -= OnSelected;
                 Destroy(upgradeUi.gameObject);
             }
+            
+            _upgradeUis.Clear();
         }
     }
 }

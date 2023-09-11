@@ -18,6 +18,7 @@ namespace Scenes
             _levelProgression.Construct();
 
             _levelProgression.UpgradeReceived += _combat.OnUpgrade;
+            _levelProgression.UpgradeReceived += _player.OnUpgrade;
             _levelProgression.LevelPassed += _combat.StopEnemySpawn;
         }
 
@@ -28,6 +29,7 @@ namespace Scenes
             _levelProgression.Disable();
 
             _levelProgression.UpgradeReceived -= _combat.OnUpgrade;
+            _levelProgression.UpgradeReceived -= _player.OnUpgrade;
             _levelProgression.LevelPassed -= _combat.StopEnemySpawn;
         }
     }

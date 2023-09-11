@@ -9,16 +9,17 @@ namespace Player.Health.Model
         private int _maxCount;
 
         public int Count => _count;
+        public int MaxCount => _maxCount;
 
         public event Action OnOutOfHealth;
 
-        public HealthModel(int defaultCount, int maxCount = 10)
+        public HealthModel(int defaultCount, int maxCount = 5)
         {
             _count = defaultCount;
             _maxCount = maxCount;
         }
 
-        public void Add(int count = 1)
+        public void Regen(int count = 1)
         {
             int newCount = _count + count;
 
@@ -29,6 +30,11 @@ namespace Player.Health.Model
             }
 
             _count = newCount;
+        }
+
+        public void IncreaseMax(int count = 1)
+        {
+            _maxCount += count;
         }
 
         public void Reduce(int count = 1)

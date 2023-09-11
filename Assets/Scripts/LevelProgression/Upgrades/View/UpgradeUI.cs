@@ -24,7 +24,6 @@ namespace LevelProgression.Upgrades.View
 
         private void OnClick()
         {
-            Debug.Log("CLICK!");
             Clicked?.Invoke(_upgrade);
         }
 

@@ -66,7 +66,7 @@ namespace Combat
                             _health.Add((int)propertyUpgrade.IncreaseAmount);
                             break;
                         case UpgradeType.HealthRegen:
-                            _health.Add((int)propertyUpgrade.IncreaseAmount);
+                            _health.Regen((int)propertyUpgrade.IncreaseAmount);
                             break;
                         case UpgradeType.MoveSpeed:
                         default:
@@ -78,7 +78,7 @@ namespace Combat
             }
         }
 
-        private void StartEnemySpawn()
+        public void StartEnemySpawn()
         {
             if (!_canSpawn) _canSpawn = true;
         

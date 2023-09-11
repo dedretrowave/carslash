@@ -12,7 +12,7 @@ namespace LevelProgression.Upgrades.Presenter
 
         private UpgradesView _view;
 
-        public event Action<Upgrade> Selected; 
+        public event Action<Upgrade> Selected;
 
         public UpgradesPresenter(UpgradesView view)
         {

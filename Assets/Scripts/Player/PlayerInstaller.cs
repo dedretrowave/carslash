@@ -34,9 +34,7 @@ namespace Player
 
         public void OnUpgrade(Upgrade upgrade)
         {
-            if (upgrade is not PropertyUpgrade) return;
-
-            PropertyUpgrade propertyUpgrade = (PropertyUpgrade)upgrade;
+            if (upgrade is not PropertyUpgrade propertyUpgrade) return;
 
             switch (propertyUpgrade.Type)
             {
@@ -44,7 +42,7 @@ namespace Player
                     _movement.IncreaseMoveSpeed(propertyUpgrade.IncreaseAmount);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return;
             }
         }
     }
