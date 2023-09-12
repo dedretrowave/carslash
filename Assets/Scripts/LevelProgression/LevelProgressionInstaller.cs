@@ -3,6 +3,7 @@ using DI;
 using Economics.Wallet.Presenter;
 using Economics.Wallet.View;
 using LevelProgression.Progression.Presenter;
+using LevelProgression.Progression.Settings;
 using LevelProgression.Upgrades.Components;
 using LevelProgression.Upgrades.Events;
 using LevelProgression.Upgrades.Presenter;
@@ -19,11 +20,12 @@ namespace LevelProgression
         [SerializeField] private UpgradesView _upgradesView;
         [Header("Settings")]
         [SerializeField] private UpgradesSettings _upgradesSettings;
+        [SerializeField] private ProgressionSettings _progressionSettings;
 
         private UpgradesPresenter _upgrades;
         private WalletPresenter _wallet;
         private ProgressionPresenter _progression;
-        private UpgradeResolver _resolver;
+        private UpgradesEventManager _upgradeEventsManager;
 
         public event Action LevelEnded;
         public event Action<int> NewLevelStarted;
@@ -31,15 +33,15 @@ namespace LevelProgression
         public void Construct()
         {
             _wallet = new(_walletView);
-            _progression = new();
+            _progression = new(_progressionSettings);
             _upgrades = new(_upgradesSettings, _upgradesView);
             
-            _resolver = new();
+            _upgradeEventsManager = new();
             
             DependencyContext.Dependencies.Add(
                 new(
-                    typeof(UpgradeResolver),
-                    () => _resolver));
+                    typeof(UpgradesEventManager),
+                    () => _upgradeEventsManager));
 
             _wallet.MoneyIncrease += _progression.IncreaseMoney;
             _progression.LevelPassed += OnLevelPassed;
@@ -60,7 +62,7 @@ namespace LevelProgression
 
         private void OnUpgradeSelected(Upgrade upgrade)
         {
-            _resolver.Apply(upgrade);
+            _upgradeEventsManager.Apply(upgrade);
             int levelIndex = _progression.IncreaseLevelAndReturn();
             NewLevelStarted?.Invoke(levelIndex);
         }

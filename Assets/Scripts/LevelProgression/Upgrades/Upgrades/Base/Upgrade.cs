@@ -3,37 +3,28 @@ using Upgrades.Components;
 
 namespace LevelProgression.Upgrades.Upgrades.Base
 {
-    public abstract class Upgrade : ScriptableObject
+    public abstract class Upgrade
     {
-        [Header("UI")]
-        [SerializeField] private Color _color;
-
-        [Header("Type")]
-        [SerializeField] private UpgradeType type;
-
+        private UpgradeSO _so;
+        
         protected object buff;
-
-        public UpgradeType Type => type;
+        
+        public UpgradeType Type => _so.Type;
+        public Color Color => _so.Color;
         public object Buff => buff;
         
-        public bool IsPaid { get; private set; }
-        public bool IsAd { get; private set; }
-
-        public Color Color => _color;
+        public bool IsPaid { get; protected set; }
+        public bool IsAd { get; protected set; } = false;
+        
         public string Name { get; private set; }
         public string Description { get; private set; }
 
-        public abstract void Construct();
-
-        public void DoubleBuff()
+        public Upgrade(UpgradeSO so)
         {
-            IsPaid = true;
+            _so = so;
         }
 
-        public void TripleBuff()
-        {
-            IsAd = true;
-        }
+        public abstract void DoubleBuff();
 
         protected void SetName(string newName)
         {

@@ -11,25 +11,19 @@ namespace LevelProgression.Upgrades.View
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private Image _bg;
-        [SerializeField] private Button _button;
 
-        private Upgrade _upgrade;
+        protected Upgrade upgrade;
 
         public event Action<Upgrade> Clicked;
 
-        private void Awake()
+        public void OnClick()
         {
-            _button.onClick.AddListener(OnClick);
-        }
-
-        private void OnClick()
-        {
-            Clicked?.Invoke(_upgrade);
+            Clicked?.Invoke(upgrade);
         }
 
         public void Display(Upgrade upgrade)
         {
-            _upgrade = upgrade;
+            this.upgrade = upgrade;
             
             _name.text = upgrade.Name;
             _description.text = upgrade.Description;

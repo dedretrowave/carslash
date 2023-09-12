@@ -1,34 +1,25 @@
+using System;
 using System.Collections.Generic;
 using Combat.Weapon.Arms.Base;
 using LevelProgression.Upgrades.Upgrades.Base;
-using UnityEngine;
 
 namespace LevelProgression.Upgrades.Upgrades
 {
-    [CreateAssetMenu(fileName = "Weapon Upgrade", order = 2)]
     public class WeaponUpgrade : Upgrade
     {
-        [SerializeField] private List<Arms> _basicArms;
-        [SerializeField] private List<Arms> _midTierArms;
-        [SerializeField] private List<Arms> _topTierArms;
-
+        private WeaponUpgradeSO _so;
         private Arms _selectedArms;
 
-        public override void Construct()
+        public WeaponUpgrade(WeaponUpgradeSO so) : base(so)
         {
-             Setup(_basicArms[Random.Range(0, _basicArms.Count)]);
+            _so = so;
+            Setup(_so.GetRandomBasic());
         }
-
-        public new void DoubleBuff()
+        
+        public override void DoubleBuff()
         {
-            base.DoubleBuff();
-            Setup(_midTierArms[Random.Range(0, _midTierArms.Count)]);
-        }
-
-        public new void TripleBuff()
-        {
-            base.TripleBuff();
-            Setup(_topTierArms[Random.Range(0, _topTierArms.Count)]);
+            IsAd = true;
+            Setup(_so.GetRandomAdvanced());
         }
 
         private void Setup(Arms selectedArms)

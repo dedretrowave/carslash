@@ -1,5 +1,7 @@
 using System;
+using DI;
 using LevelProgression.Upgrades.Components;
+using LevelProgression.Upgrades.Events;
 using LevelProgression.Upgrades.Upgrades;
 using LevelProgression.Upgrades.Upgrades.Base;
 using Player.Movement.Model;
@@ -16,19 +18,25 @@ namespace Player
         [SerializeField] private MovementView _movementView;
 
         private Input.Input _input;
+        private UpgradesEventManager _upgradesEventManager;
 
         private MovementPresenter _movement;
 
         public void Construct()
         {
+            _upgradesEventManager = DependencyContext.Dependencies.Get<UpgradesEventManager>();
+            
             _input = new();
             _movement = new(_movementView, _movementSettings);
+            
+            _upgradesEventManager.Subscribe<float>(UpgradeType.MoveSpeed, _movement.IncreaseMoveSpeed);
 
             _input.OnMove += _movement.Move;
         }
 
         public void Disable()
         {
+            _upgradesEventManager.Unsubscribe<float>(UpgradeType.MoveSpeed, _movement.IncreaseMoveSpeed);
             _input.OnMove -= _movement.Move;
             _input.Disable();
         }

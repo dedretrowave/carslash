@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DamageUpgrade
   m_EditorClassIdentifier: 
   _color: {r: 1, g: 0.9335232, b: 0.051886797, a: 1}
-  _name: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0443\u0440\u043E\u043D\u0430"
-  _descriptionBase: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u0443\u0440\u043E\u043D \u043D\u0430"
   type: 1
+  _name: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0443\u0440\u043E\u043D\u0430"
+  _description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+    \u0443\u0440\u043E\u043D \u043D\u0430"
   _descriptionAddition: '%'
   _increaseAmountVariants:
   - 5

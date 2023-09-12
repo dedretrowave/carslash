@@ -1,4 +1,5 @@
 using System;
+using LevelProgression.Progression.Settings;
 
 namespace LevelProgression.Progression.Model
 {
@@ -6,22 +7,23 @@ namespace LevelProgression.Progression.Model
     {
         private int _currentLevel;
         private int _moneyToIncreaseLevel;
+        private int _moneyToIncreaseLevelBase;
         private int _currentMoney;
         private bool _levelIsPassed;
 
         public int CurrentLevel => _currentLevel;
         public bool LevelIsPassed => _levelIsPassed;
 
-        public ProgressionModel()
+        public ProgressionModel(ProgressionSettings settings)
         {
             _currentLevel = 1;
-            _moneyToIncreaseLevel = 10;
+            _moneyToIncreaseLevel = _moneyToIncreaseLevelBase = settings.MoneyToIncreaseLevelBase;
         }
 
         public void IncreaseLevel()
         {
             _currentLevel++;
-            _moneyToIncreaseLevel *= _currentLevel;
+            _moneyToIncreaseLevel += _moneyToIncreaseLevelBase * _currentLevel;
             _levelIsPassed = false;
         }
 

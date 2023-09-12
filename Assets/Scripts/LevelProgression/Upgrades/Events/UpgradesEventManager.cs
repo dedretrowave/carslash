@@ -8,7 +8,7 @@ using Upgrades.Components;
 
 namespace LevelProgression.Upgrades.Events
 {
-    public class UpgradeResolver
+    public class UpgradesEventManager
     {
         private readonly Hashtable _listeners = new();
 

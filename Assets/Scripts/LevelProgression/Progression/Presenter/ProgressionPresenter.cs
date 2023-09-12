@@ -1,5 +1,6 @@
 using System;
 using LevelProgression.Progression.Model;
+using LevelProgression.Progression.Settings;
 
 namespace LevelProgression.Progression.Presenter
 {
@@ -9,9 +10,9 @@ namespace LevelProgression.Progression.Presenter
 
         public event Action LevelPassed;
 
-        public ProgressionPresenter()
+        public ProgressionPresenter(ProgressionSettings settings)
         {
-            _model = new();
+            _model = new(settings);
         }
 
         public int IncreaseLevelAndReturn()

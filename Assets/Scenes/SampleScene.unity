@@ -282,8 +282,10 @@ MonoBehaviour:
     _upgradesCount: 4
     _paidUpgradesCount: 1
     _adUpgradesCount: 1
-    _chanceOfPaidUpgrade: 45
-    _chanceOfAdUpgrade: 20
+    _chanceOfPaidUpgrade: 0
+    _chanceOfAdUpgrade: 80
+  _progressionSettings:
+    _moneyToIncreaseLevelBase: 10
 --- !u!1 &491970618
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +322,7 @@ MonoBehaviour:
   - {fileID: 3471266365613095292, guid: dd057d41439d50f47a8e3905ec30349e, type: 3}
   _healthView: {fileID: 578767280}
   _weapon: {fileID: 977241929}
-  _enemiesSpawnTimeSpan: 2
+  _enemiesSpawnTimeSpan: 5
 --- !u!4 &491970620
 Transform:
   m_ObjectHideFlags: 0
@@ -979,6 +981,7 @@ MonoBehaviour:
   _wrapper: {fileID: 1198031232}
   _upgradesParent: {fileID: 576836999}
   _upgradesPrefab: {fileID: 4051889967285008390, guid: dea46c03c92b3ed438400174b6a7995a, type: 3}
+  _adUpgradePrefab: {fileID: 4952491340332352345, guid: 5406a548d581f7e4f8b1465e1c183bbc, type: 3}
 --- !u!1 &959930719
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using DI;
 using LevelProgression.Upgrades.Components;
-using LevelProgression.Upgrades.Events;
 using LevelProgression.Upgrades.Model;
 using LevelProgression.Upgrades.Upgrades.Base;
 using LevelProgression.Upgrades.View;
@@ -34,7 +32,7 @@ namespace LevelProgression.Upgrades.Presenter
         public void Show()
         {
             List<Upgrade> upgrades = _model.GetRandom();
-            
+
             _view.Show(upgrades);
         }
 

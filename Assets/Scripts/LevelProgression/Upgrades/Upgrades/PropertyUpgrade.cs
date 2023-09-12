@@ -1,50 +1,37 @@
-using System.Collections.Generic;
+using System;
 using LevelProgression.Upgrades.Upgrades.Base;
-using UnityEngine;
 
 namespace LevelProgression.Upgrades.Upgrades
 {
-    [CreateAssetMenu(fileName = "Property Upgrade", order = 1)]
     public class PropertyUpgrade : Upgrade
     {
-        [SerializeField] private string _name;
-        [SerializeField] private string _description;
-        [SerializeField] private string _descriptionAddition;
-        [SerializeField] private List<float> _increaseAmountVariants;
-
+        private PropertyUpgradeSO _so;
+        
         private float _increaseAmount;
         
         public float IncreaseAmount => _increaseAmount;
 
-        public override void Construct()
+        public PropertyUpgrade(PropertyUpgradeSO so) : base(so)
         {
-            _increaseAmount = _increaseAmountVariants
-                [Random.Range(0, _increaseAmountVariants.Count)];
+            _so = so;
+            _increaseAmount = _so.GetIncreasedAmount();
             buff = _increaseAmount;
 
-            base.SetName(_name);
+            base.SetName(_so.Name);
             SetDescription();
         }
 
-        public new void DoubleBuff()
+        public override void DoubleBuff()
         {
-            base.DoubleBuff();
-            _increaseAmount *= 2;
+            IsAd = true;
+            _increaseAmount *= 1.5f;
             buff = _increaseAmount;
             SetDescription();
         }
-
-        public new void TripleBuff()
-        {
-            base.TripleBuff();
-            _increaseAmount *= 3;
-            buff = _increaseAmount;
-            SetDescription();
-        }
-
+        
         private void SetDescription()
         {
-            base.SetDescription($"{_description} {_increaseAmount} {_descriptionAddition}");
+            base.SetDescription($"{_so.Description} {_increaseAmount} {_so.DescriptionAddition}");
         }
     }
 }

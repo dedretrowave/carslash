@@ -26,7 +26,7 @@ namespace Combat
         [Header("Parameters")]
         [SerializeField] private float _enemiesSpawnTimeSpan = 5;
 
-        private UpgradeResolver _upgradeResolver;
+        private UpgradesEventManager _upgradesEventManager;
 
         private HealthPresenter _health;
 
@@ -36,7 +36,7 @@ namespace Combat
 
         public void Construct()
         {
-            _upgradeResolver = DependencyContext.Dependencies.Get<UpgradeResolver>();
+            _upgradesEventManager = DependencyContext.Dependencies.Get<UpgradesEventManager>();
             
             _health = new(_healthView);
 
@@ -45,10 +45,10 @@ namespace Combat
 
             StartEnemySpawn();
             
-            _upgradeResolver.Subscribe<float>(UpgradeType.HealthAmount, _health.Add);
-            _upgradeResolver.Subscribe<float>(UpgradeType.HealthRegen, _health.Regen);
-            _upgradeResolver.Subscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
-            _upgradeResolver.Subscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
+            _upgradesEventManager.Subscribe<float>(UpgradeType.HealthAmount, _health.Add);
+            _upgradesEventManager.Subscribe<float>(UpgradeType.HealthRegen, _health.Regen);
+            _upgradesEventManager.Subscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
+            _upgradesEventManager.Subscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
 
             _health.OutOfHealth += OnOutOfHealth;
         }
@@ -57,10 +57,10 @@ namespace Combat
         {
             _health.OutOfHealth -= OnOutOfHealth;
             
-            _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthAmount, _health.Add);
-            _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthRegen, _health.Regen);
-            _upgradeResolver.Unsubscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
-            _upgradeResolver.Unsubscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
+            _upgradesEventManager.Unsubscribe<float>(UpgradeType.HealthAmount, _health.Add);
+            _upgradesEventManager.Unsubscribe<float>(UpgradeType.HealthRegen, _health.Regen);
+            _upgradesEventManager.Unsubscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
+            _upgradesEventManager.Unsubscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
             
             _health.Disable();
         }
@@ -73,7 +73,7 @@ namespace Combat
 
         public void OnNewLevelStarted(int levelIndex)
         {
-            float enemySpawnTimeCut = levelIndex * .2f;
+            float enemySpawnTimeCut = .2f;
             _enemiesSpawnTimeSpan -= enemySpawnTimeCut;
             
             StartEnemySpawn();
