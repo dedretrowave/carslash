@@ -278,6 +278,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walletView: {fileID: 1330131809}
   _upgradesView: {fileID: 801701255}
+  _upgradesSettings:
+    _upgradesCount: 4
+    _paidUpgradesCount: 1
+    _adUpgradesCount: 1
+    _chanceOfPaidUpgrade: 45
+    _chanceOfAdUpgrade: 20
 --- !u!1 &491970618
 GameObject:
   m_ObjectHideFlags: 0

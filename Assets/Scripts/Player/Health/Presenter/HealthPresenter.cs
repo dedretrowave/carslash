@@ -1,7 +1,6 @@
 using System;
 using Player.Health.Model;
 using Player.Health.View;
-using UnityEngine;
 
 namespace Player.Health.Presenter
 {
@@ -33,10 +32,20 @@ namespace Player.Health.Presenter
             OutOfHealth?.Invoke();
         }
 
+        public void Regen(float count = 1)
+        {
+            Regen((int) count);
+        }
+
         public void Regen(int count = 1)
         {
             _model.Regen(count);
             _view.DrawAndFill(_model.Count, _model.MaxCount);
+        }
+        
+        public void Add(float count = 1)
+        {
+            Add((int) count);
         }
 
         public void Add(int count = 1)

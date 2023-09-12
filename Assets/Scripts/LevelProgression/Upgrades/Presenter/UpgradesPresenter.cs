@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
-using LevelProgression.Upgrades.Components.Base;
+using DI;
+using LevelProgression.Upgrades.Components;
+using LevelProgression.Upgrades.Events;
 using LevelProgression.Upgrades.Model;
+using LevelProgression.Upgrades.Upgrades.Base;
 using LevelProgression.Upgrades.View;
 
 namespace LevelProgression.Upgrades.Presenter
@@ -14,12 +17,12 @@ namespace LevelProgression.Upgrades.Presenter
 
         public event Action<Upgrade> Selected;
 
-        public UpgradesPresenter(UpgradesView view)
+        public UpgradesPresenter(UpgradesSettings settings, UpgradesView view)
         {
             _view = view;
 
-            _model = new();
-            
+            _model = new(settings);
+
             _view.Selected += OnSelected;
         }
         

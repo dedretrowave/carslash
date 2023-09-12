@@ -1,5 +1,6 @@
 using Combat;
 using LevelProgression;
+using LevelProgression.Upgrades.Events;
 using Player;
 using UnityEngine;
 
@@ -13,12 +14,10 @@ namespace Scenes
 
         private void Start()
         {
+            _levelProgression.Construct();
             _player.Construct();
             _combat.Construct();
-            _levelProgression.Construct();
 
-            _levelProgression.UpgradeReceived += _combat.OnUpgrade;
-            _levelProgression.UpgradeReceived += _player.OnUpgrade;
             _levelProgression.LevelEnded += _combat.ClearEnemies;
             _levelProgression.NewLevelStarted += _combat.OnNewLevelStarted;
 
@@ -28,14 +27,15 @@ namespace Scenes
 
         private void OnDisable()
         {
+            _levelProgression.Disable();
             _player.Disable();
             _combat.Disable();
-            _levelProgression.Disable();
 
-            _levelProgression.UpgradeReceived -= _combat.OnUpgrade;
-            _levelProgression.UpgradeReceived -= _player.OnUpgrade;
             _levelProgression.LevelEnded -= _combat.ClearEnemies;
             _levelProgression.NewLevelStarted -= _combat.OnNewLevelStarted;
+            
+            _combat.OutOfHealth -= _player.Disable;
+            _combat.OutOfHealth -= _levelProgression.OnLose;
         }
     }
 }

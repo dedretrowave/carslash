@@ -28,7 +28,6 @@ namespace Combat.Weapon.Arms.Projectile
         {
             if (!other.transform.TryGetComponent(out EnemyView enemy)) return;
             
-            Debug.Log(_damage);
             enemy.TakeDamage(_damage);
             Instantiate(_impactPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);

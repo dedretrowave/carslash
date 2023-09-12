@@ -5,8 +5,8 @@ using Combat.Components;
 using Combat.Enemies.Presenter;
 using Combat.Weapon.Arms.Base;
 using Combat.Weapon.Views;
-using LevelProgression.Upgrades.Components;
-using LevelProgression.Upgrades.Components.Base;
+using DI;
+using LevelProgression.Upgrades.Events;
 using Player.Health.Presenter;
 using Player.Health.View;
 using UnityEngine;
@@ -26,6 +26,8 @@ namespace Combat
         [Header("Parameters")]
         [SerializeField] private float _enemiesSpawnTimeSpan = 5;
 
+        private UpgradeResolver _upgradeResolver;
+
         private HealthPresenter _health;
 
         private bool _canSpawn;
@@ -34,12 +36,18 @@ namespace Combat
 
         public void Construct()
         {
+            _upgradeResolver = DependencyContext.Dependencies.Get<UpgradeResolver>();
+            
             _health = new(_healthView);
 
             _weapon.Deploy(_defaultArms[0]);
             _weapon.Deploy(_defaultArms[1]);
 
             StartEnemySpawn();
+            
+            _upgradeResolver.Subscribe<float>(UpgradeType.HealthAmount, _health.Add);
+            _upgradeResolver.Subscribe<float>(UpgradeType.HealthRegen, _health.Regen);
+            _upgradeResolver.Subscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
 
             _health.OutOfHealth += OnOutOfHealth;
         }
@@ -48,40 +56,11 @@ namespace Combat
         {
             _health.OutOfHealth -= OnOutOfHealth;
             
+            _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthAmount, _health.Add);
+            _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthRegen, _health.Regen);
+            _upgradeResolver.Unsubscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
+            
             _health.Disable();
-        }
-
-        public void OnUpgrade(Upgrade upgrade)
-        {
-            switch (upgrade)
-            {
-                //TODO: REFACTOR
-                case WeaponUpgrade weaponUpgrade:
-                {
-                    _weapon.Deploy(weaponUpgrade.Arms);
-                    break;
-                }
-                case PropertyUpgrade propertyUpgrade:
-                {
-                    switch (propertyUpgrade.Type)
-                    {
-                        case UpgradeType.Damage:
-                            _weapon.IncreaseBaseDamage(propertyUpgrade.IncreaseAmount);
-                            break;
-                        case UpgradeType.HealthAmount:
-                            _health.Add((int)propertyUpgrade.IncreaseAmount);
-                            break;
-                        case UpgradeType.HealthRegen:
-                            _health.Regen((int)propertyUpgrade.IncreaseAmount);
-                            break;
-                        case UpgradeType.MoveSpeed:
-                        default:
-                            return;
-                    }
-
-                    break;
-                }
-            }
         }
 
         private void OnOutOfHealth()
@@ -144,6 +123,11 @@ namespace Combat
         {
             enemy.Collide -= OnEnemyAttack;
             enemy.Destroyed -= UnsubscribeFromEnemy;
+        }
+
+        public void ApplyUpgrade(object propertyIncreaseAmount)
+        {
+            
         }
     }
 }

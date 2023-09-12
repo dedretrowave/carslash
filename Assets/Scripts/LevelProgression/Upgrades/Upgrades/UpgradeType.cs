@@ -9,5 +9,6 @@ namespace Upgrades.Components
         Damage,
         HealthAmount,
         HealthRegen,
+        Weapon
     }
 }

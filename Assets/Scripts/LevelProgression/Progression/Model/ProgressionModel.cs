@@ -15,7 +15,7 @@ namespace LevelProgression.Progression.Model
         public ProgressionModel()
         {
             _currentLevel = 1;
-            _moneyToIncreaseLevel = 20;
+            _moneyToIncreaseLevel = 10;
         }
 
         public void IncreaseLevel()

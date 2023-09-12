@@ -1,6 +1,7 @@
 using System;
 using LevelProgression.Upgrades.Components;
-using LevelProgression.Upgrades.Components.Base;
+using LevelProgression.Upgrades.Upgrades;
+using LevelProgression.Upgrades.Upgrades.Base;
 using Player.Movement.Model;
 using Player.Movement.Presenter;
 using Player.Movement.View;

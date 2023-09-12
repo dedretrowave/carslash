@@ -16,8 +16,8 @@ MonoBehaviour:
   _name: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0436\u0438\u0437\u043D\u0435\u0439"
   _descriptionBase: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
     \u043A\u043E\u043B-\u0432\u043E \u0436\u0438\u0437\u043D\u0435\u0439 \u043D\u0430"
+  type: 2
   _descriptionAddition: 
-  _type: 2
   _increaseAmountVariants:
   - 1
   - 2

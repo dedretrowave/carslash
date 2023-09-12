@@ -1,5 +1,5 @@
 using System;
-using LevelProgression.Upgrades.Components.Base;
+using LevelProgression.Upgrades.Upgrades.Base;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

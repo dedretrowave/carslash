@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using LevelProgression.Upgrades.Components.Base;
+using LevelProgression.Upgrades.Upgrades.Base;
 using UnityEngine;
 
 namespace LevelProgression.Upgrades.View

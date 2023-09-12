@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using LevelProgression.Upgrades.Events;
 using UnityEngine;
 
 namespace Combat.Weapon.Views
@@ -42,6 +43,14 @@ namespace Combat.Weapon.Views
                 if (arms == null) continue;
 
                 arms.SetDamageIncrease(_baseDamageIncrease);
+            }
+        }
+
+        public void ApplyUpgrade(object buff)
+        {
+            if (buff is Arms.Base.Arms newArms)
+            {
+                Deploy(newArms);
             }
         }
     }
