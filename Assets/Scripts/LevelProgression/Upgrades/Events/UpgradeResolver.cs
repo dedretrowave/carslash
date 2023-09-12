@@ -15,7 +15,6 @@ namespace LevelProgression.Upgrades.Events
         public void Subscribe<T>(UpgradeType type, Action<T> applyCallback)
         {
             string key = GetKey<T>(type);
-            Debug.Log(key);
 
             Action<T> currentEvent = null;
 

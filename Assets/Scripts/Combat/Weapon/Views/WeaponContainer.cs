@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using LevelProgression.Upgrades.Events;
 using UnityEngine;
 
 namespace Combat.Weapon.Views
@@ -8,7 +7,8 @@ namespace Combat.Weapon.Views
     public class WeaponContainer : MonoBehaviour
     {
         [SerializeField] private PlacePointWeaponDictionary _arms;
-        private float _baseDamageIncrease = 1;
+        private float _baseDamageIncreaseRate = 1;
+        private int _weaponOverrideIndex = 0;
 
         private int _enemiesInRange;
 
@@ -18,17 +18,21 @@ namespace Combat.Weapon.Views
             {
                 if (_arms.ElementAt(_arms.Count - 1).Value != null)
                 {
-                    Transform firstPoint = _arms.ElementAt(0).Key;
-                    Destroy(_arms[firstPoint].gameObject);
-                    _arms[firstPoint] = Instantiate(newArms, firstPoint);
-                    _arms[firstPoint].SetDamageIncrease(_baseDamageIncrease);
+                    if (_weaponOverrideIndex == _arms.Count) _weaponOverrideIndex = 0;
+                    
+                    Transform newPoint = _arms.ElementAt(_weaponOverrideIndex).Key;
+                    Destroy(_arms[newPoint].gameObject);
+                    _arms[newPoint] = Instantiate(newArms, newPoint);
+                    Debug.Log(_arms[newPoint].name);
+                    _arms[newPoint].SetDamageIncrease(_baseDamageIncreaseRate);
+                    _weaponOverrideIndex++;
                     return;
                 }
                 
                 if (_arms[place] != null) continue;
 
                 _arms[place] = Instantiate(newArms, place);
-                _arms[place].SetDamageIncrease(_baseDamageIncrease);
+                _arms[place].SetDamageIncrease(_baseDamageIncreaseRate);
 
                 return;
             }
@@ -36,13 +40,13 @@ namespace Combat.Weapon.Views
 
         public void IncreaseBaseDamage(float amount)
         {
-            _baseDamageIncrease += amount / 100;
+            _baseDamageIncreaseRate += amount / 100;
 
             foreach ((Transform _, Arms.Base.Arms arms) in _arms)
             {
                 if (arms == null) continue;
 
-                arms.SetDamageIncrease(_baseDamageIncrease);
+                arms.SetDamageIncrease(_baseDamageIncreaseRate);
             }
         }
 

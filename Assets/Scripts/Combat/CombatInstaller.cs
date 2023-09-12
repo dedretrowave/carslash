@@ -48,6 +48,7 @@ namespace Combat
             _upgradeResolver.Subscribe<float>(UpgradeType.HealthAmount, _health.Add);
             _upgradeResolver.Subscribe<float>(UpgradeType.HealthRegen, _health.Regen);
             _upgradeResolver.Subscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
+            _upgradeResolver.Subscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
 
             _health.OutOfHealth += OnOutOfHealth;
         }
@@ -59,6 +60,7 @@ namespace Combat
             _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthAmount, _health.Add);
             _upgradeResolver.Unsubscribe<float>(UpgradeType.HealthRegen, _health.Regen);
             _upgradeResolver.Unsubscribe<Arms>(UpgradeType.Weapon, _weapon.Deploy);
+            _upgradeResolver.Unsubscribe<float>(UpgradeType.Damage, _weapon.IncreaseBaseDamage);
             
             _health.Disable();
         }

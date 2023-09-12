@@ -43,7 +43,6 @@ namespace Player.Health.Model
 
             if (newCount <= 0)
             {
-                Debug.Log("OUT OF HEALTH");
                 _count = 0;
                 OutOfHealth?.Invoke();
                 return;
