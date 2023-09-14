@@ -1,7 +1,8 @@
 using Combat;
+using DI;
 using LevelProgression;
-using LevelProgression.Upgrades.Events;
 using Player;
+using Save;
 using UnityEngine;
 
 namespace Scenes
@@ -11,6 +12,7 @@ namespace Scenes
         [SerializeField] private CombatInstaller _combat;
         [SerializeField] private LevelProgressionInstaller _levelProgression;
         [SerializeField] private PlayerInstaller _player;
+        [SerializeField] private SaveMediator _saveMediator;
 
         private void Start()
         {

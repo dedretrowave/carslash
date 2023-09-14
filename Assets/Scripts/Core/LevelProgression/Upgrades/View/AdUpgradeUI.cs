@@ -6,7 +6,7 @@ namespace LevelProgression.Upgrades.View
 {
     public class AdUpgradeUI : UpgradeUI
     {
-        public event Action<Upgrade> Clicked; 
+        public new event Action<Upgrade> Clicked; 
 
         public new void OnClick()
         {
