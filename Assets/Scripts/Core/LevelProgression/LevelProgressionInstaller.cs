@@ -1,8 +1,9 @@
 using System;
 using Core.Economics.Wallet.Presenter;
+using Core.LevelProgression.Progression.Presenter;
+using Core.LevelProgression.Progression.View;
 using DI;
 using Economics.Wallet.View;
-using LevelProgression.Progression.Presenter;
 using LevelProgression.Progression.Settings;
 using LevelProgression.Upgrades.Components;
 using LevelProgression.Upgrades.Events;
@@ -18,6 +19,7 @@ namespace LevelProgression
         [Header("Views")]
         [SerializeField] private WalletView _walletView;
         [SerializeField] private UpgradesView _upgradesView;
+        [SerializeField] private ProgressionView _progressionView;
         [Header("Settings")]
         [SerializeField] private UpgradesSettings _upgradesSettings;
         [SerializeField] private ProgressionSettings _progressionSettings;
@@ -33,7 +35,7 @@ namespace LevelProgression
         public void Construct()
         {
             _wallet = new(_walletView);
-            _progression = new(_progressionSettings);
+            _progression = new(_progressionView, _progressionSettings);
             _upgrades = new(_upgradesSettings, _upgradesView);
             
             _upgradeEventsManager = new();
@@ -43,14 +45,14 @@ namespace LevelProgression
                     typeof(UpgradesEventManager),
                     () => _upgradeEventsManager));
 
-            _wallet.MoneyIncrease += _progression.IncreaseMoney;
+            _wallet.MoneyIncrease += _progression.IncreaseProgress;
             _progression.LevelPassed += OnLevelPassed;
             _upgrades.Selected += OnUpgradeSelected;
         }
 
         public void Disable()
         {
-            _wallet.MoneyIncrease -= _progression.IncreaseMoney;
+            _wallet.MoneyIncrease -= _progression.IncreaseProgress;
             _progression.LevelPassed -= OnLevelPassed;
             _upgrades.Selected -= OnUpgradeSelected;
         }

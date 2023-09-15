@@ -1,9 +1,10 @@
 using System;
-using Combat.Enemies.Model;
-using Combat.Enemies.View;
+using Core.Combat.Enemies.Components;
+using Core.Combat.Enemies.Model;
+using Core.Combat.Enemies.View;
 using UnityEngine;
 
-namespace Combat.Enemies.Presenter
+namespace Core.Combat.Enemies.Presenter
 {
     public class EnemyPresenter
     {
@@ -12,11 +13,11 @@ namespace Combat.Enemies.Presenter
         private EnemyView _view;
 
         public event Action<Transform, EnemyPresenter> Collide;
-        public event Action<EnemyPresenter> Destroyed; 
-            
-        public EnemyPresenter(EnemyView view, Transform player)
+        public event Action<EnemyPresenter> Destroyed;
+        
+        public EnemyPresenter(EnemyView view, Transform player, EnemySettings settings)
         {
-            _model = new();
+            _model = new(settings);
             
             _view = view;
             
@@ -37,6 +38,13 @@ namespace Combat.Enemies.Presenter
         private void OnCollision(Transform collider)
         {
             Collide?.Invoke(collider, this);
+        }
+
+        public void CleanDestroy()
+        {
+            Destroyed?.Invoke(this);
+            Disable();
+            _view.CleanDestroy();
         }
 
         public void Destroy()

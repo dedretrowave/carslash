@@ -2,7 +2,7 @@ using System;
 using Economics.Money;
 using UnityEngine;
 
-namespace Combat.Enemies.View
+namespace Core.Combat.Enemies.View
 {
     public class EnemyView : MonoBehaviour
     {
@@ -28,6 +28,11 @@ namespace Combat.Enemies.View
         public void TakeDamage(float damage)
         {
             Damage?.Invoke(damage);
+        }
+
+        public void CleanDestroy()
+        {
+            Destroy(gameObject);
         }
 
         public void Destroy()

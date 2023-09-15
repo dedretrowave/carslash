@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using Player.Health.Components;
 using UnityEngine;
 using UnityEngine.UI;
-using Image = UnityEngine.UI.Image;
 
 namespace Player.Health.View
 {

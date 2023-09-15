@@ -6,32 +6,35 @@ namespace LevelProgression.Progression.Model
     public class ProgressionModel
     {
         private int _currentLevel;
-        private int _moneyToIncreaseLevel;
-        private int _moneyToIncreaseLevelBase;
-        private int _currentMoney;
+        private int _progressCap;
+        private int _progressCapBase;
+        private int _currentProgress;
         private bool _levelIsPassed;
 
         public int CurrentLevel => _currentLevel;
         public bool LevelIsPassed => _levelIsPassed;
+        public int CurrentProgress => _currentProgress;
+        public int ProgressCap => _progressCap;
 
         public ProgressionModel(ProgressionSettings settings)
         {
             _currentLevel = 1;
-            _moneyToIncreaseLevel = _moneyToIncreaseLevelBase = settings.MoneyToIncreaseLevelBase;
+            _progressCap = _progressCapBase = settings.MoneyToIncreaseLevelBase;
         }
 
         public void IncreaseLevel()
         {
             _currentLevel++;
-            _moneyToIncreaseLevel += _moneyToIncreaseLevelBase * _currentLevel;
+            _progressCap = _progressCapBase * _currentLevel;
+            _currentProgress = 0;
             _levelIsPassed = false;
         }
 
-        public void IncreaseMoney(int amount = 1)
+        public void IncreaseProgress(int amount = 1)
         {
-            _currentMoney += amount;
+            _currentProgress += amount;
 
-            if (_currentMoney >= _moneyToIncreaseLevel)
+            if (_currentProgress >= _progressCap)
             {
                 _levelIsPassed = true;
             }

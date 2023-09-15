@@ -1,4 +1,4 @@
-using Combat.Enemies.View;
+using Core.Combat.Enemies.View;
 using UnityEngine;
 
 namespace Combat.Weapon.Arms.Projectile

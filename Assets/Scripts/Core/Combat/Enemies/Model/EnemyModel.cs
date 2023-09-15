@@ -1,6 +1,7 @@
 using System;
+using Core.Combat.Enemies.Components;
 
-namespace Combat.Enemies.Model
+namespace Core.Combat.Enemies.Model
 {
     public class EnemyModel
     {
@@ -10,9 +11,9 @@ namespace Combat.Enemies.Model
 
         public event Action OutOfHealth;
 
-        public EnemyModel(int maxHealth = 10)
+        public EnemyModel(EnemySettings settings)
         {
-            _health = maxHealth;
+            _health = settings.MaxHealth;
         }
 
         public void ReduceHealth(float amount)
