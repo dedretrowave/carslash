@@ -11,7 +11,10 @@ namespace Core.Shops.SkinShop.Presenter
 
         private SkinShopView _view;
 
-        public event Action<Skin> Selected; 
+        private Skin _skinToPurchase;
+
+        public event Action<Skin> Selected;
+        public event Action<int> TriedPurchase; 
 
         public SkinShopPresenter(SkinShopView view, SkinShopSettings settings)
         {
@@ -22,15 +25,21 @@ namespace Core.Shops.SkinShop.Presenter
             _view.Construct(settings);
 
             _view.Selected += OnSelected;
-            _view.Purchased += OnPurchased;
+            _view.TriedPurchase += TryPurchase;
             _view.SkinToPurchaseSelected += OnPurchaseSkinSelected;
         }
 
         ~SkinShopPresenter()
         {
             _view.Selected -= OnSelected;
-            _view.Purchased -= OnPurchased;
+            _view.TriedPurchase -= TryPurchase;
             _view.SkinToPurchaseSelected -= OnPurchaseSkinSelected;
+        }
+        
+        public void Purchase()
+        {
+            _model.MarkPurchased(_skinToPurchase);
+            _view.DisplayWindow(_model.GetIsPurchased(_skinToPurchase));
         }
 
         private void OnPurchaseSkinSelected(Skin skin)
@@ -40,10 +49,13 @@ namespace Core.Shops.SkinShop.Presenter
             _view.DisplayWindow(isPurchased, price);
         }
 
-        private void OnPurchased(Skin skin)
+        private void TryPurchase(Skin skin)
         {
-            _model.MarkPurchased(skin);
-            _view.DisplayWindow(_model.GetIsPurchased(skin));
+            _skinToPurchase = skin;
+            
+            int price = _model.GetPrice(skin);
+            
+            TriedPurchase?.Invoke(price);
         }
 
         private void OnSelected(Skin skin)

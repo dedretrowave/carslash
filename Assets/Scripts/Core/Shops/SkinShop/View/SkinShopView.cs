@@ -16,19 +16,19 @@ namespace Core.Shops.SkinShop.View
         private List<SkinPlace> _places = new();
 
         public event Action<Skin> Selected;
-        public event Action<Skin> Purchased;
+        public event Action<Skin> TriedPurchase; 
         public event Action<Skin> SkinToPurchaseSelected; 
 
         private void Start()
         {
             _purchaseWindow.Selected += Select;
-            _purchaseWindow.Purchased += Purchase;
+            _purchaseWindow.Purchased += TryPurchase;
         }
         
         private void OnDisable()
         {
             _purchaseWindow.Selected -= Select;
-            _purchaseWindow.Purchased -= Purchase;
+            _purchaseWindow.Purchased -= TryPurchase;
             
             foreach (SkinPlace place in _places)
             {
@@ -64,7 +64,7 @@ namespace Core.Shops.SkinShop.View
             _purchaseWindow.Show();
             _purchaseWindow.SwitchButtons(isPurchased);
             _purchaseWindow.SetPrice(price);
-            _purchaseWindow.transform.position = _currentPlace.transform.position;
+            _purchaseWindow.transform.position = _currentPlace.transform.position + Vector3.up * 5f;
         }
 
         private void HideWindow()
@@ -77,9 +77,9 @@ namespace Core.Shops.SkinShop.View
             Selected?.Invoke(_currentPlace.Skin);
         }
 
-        private void Purchase()
+        private void TryPurchase()
         {
-            Purchased?.Invoke(_currentPlace.Skin);
+            TriedPurchase?.Invoke(_currentPlace.Skin);
         }
     }
 }

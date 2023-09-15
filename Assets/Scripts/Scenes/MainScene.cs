@@ -1,4 +1,5 @@
 using System;
+using Core.Player;
 using Core.Shops;
 using Player;
 using UnityEngine;
@@ -7,8 +8,8 @@ namespace Scenes
 {
     public class MainScene : MonoBehaviour
     {
-        [SerializeField] private PlayerInstaller _player;
-        [SerializeField] private SkinsInstaller _skins;
+        [SerializeField] private PlayerMainSceneInstaller _player;
+        [SerializeField] private ShopsInstaller _skins;
 
         private void Start()
         {

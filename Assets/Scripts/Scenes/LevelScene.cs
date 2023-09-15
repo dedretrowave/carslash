@@ -1,4 +1,5 @@
 using Combat;
+using Core.Player;
 using DI;
 using LevelProgression;
 using Player;
@@ -11,7 +12,7 @@ namespace Scenes
     {
         [SerializeField] private CombatInstaller _combat;
         [SerializeField] private LevelProgressionInstaller _levelProgression;
-        [SerializeField] private PlayerInstaller _player;
+        [SerializeField] private PlayerLevelSceneInstaller _player;
         [SerializeField] private SaveMediator _saveMediator;
 
         private void Start()

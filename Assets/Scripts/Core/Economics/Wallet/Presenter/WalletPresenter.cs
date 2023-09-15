@@ -2,7 +2,7 @@ using System;
 using Economics.Wallet.Model;
 using Economics.Wallet.View;
 
-namespace Economics.Wallet.Presenter
+namespace Core.Economics.Wallet.Presenter
 {
     public class WalletPresenter
     {
@@ -26,6 +26,12 @@ namespace Economics.Wallet.Presenter
         ~WalletPresenter()
         {
             _view.Pickup -= OnPickup;
+        }
+
+        public void Reduce(int amount)
+        {
+            _model.Reduce(amount);
+            _view.SetMoney(_model.Amount);
         }
 
         private void OnPickup()

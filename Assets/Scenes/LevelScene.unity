@@ -498,6 +498,9 @@ MonoBehaviour:
   _movementSettings:
     _moveSpeed: 400
   _movementView: {fileID: 602197688}
+  _skinSettings:
+    _defaultSkin: {fileID: 1518054754993121702, guid: da0920b95e7ee3e4daa604168b7d321b, type: 3}
+  _skinView: {fileID: 1466992791}
 --- !u!1 &602197685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,6 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34319a62af6543209d9f90b09618b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _childContainer: {fileID: 1466992790}
 --- !u!1 &1467197661
 GameObject:
   m_ObjectHideFlags: 0

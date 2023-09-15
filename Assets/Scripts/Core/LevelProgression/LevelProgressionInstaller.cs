@@ -1,6 +1,6 @@
 using System;
+using Core.Economics.Wallet.Presenter;
 using DI;
-using Economics.Wallet.Presenter;
 using Economics.Wallet.View;
 using LevelProgression.Progression.Presenter;
 using LevelProgression.Progression.Settings;

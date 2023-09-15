@@ -11,7 +11,7 @@ namespace Economics.Wallet.Model
         public WalletModel()
         {
             // TODO: ADD SAVE
-            _amount = 0;
+            _amount = 10000;
         }
 
         public void Add(int amount = 1)
