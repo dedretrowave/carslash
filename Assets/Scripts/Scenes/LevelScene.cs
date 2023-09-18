@@ -21,7 +21,7 @@ namespace Scenes
             _player.Construct();
             _combat.Construct();
 
-            _levelProgression.LevelEnded += _combat.ClearEnemies;
+            _levelProgression.LevelEnded += _combat.OnLevelEnded;
             _levelProgression.NewLevelStarted += _combat.OnNewLevelStarted;
 
             _combat.OutOfHealth += _player.Disable;
@@ -34,7 +34,7 @@ namespace Scenes
             _player.Disable();
             _combat.Disable();
 
-            _levelProgression.LevelEnded -= _combat.ClearEnemies;
+            _levelProgression.LevelEnded -= _combat.OnLevelEnded;
             _levelProgression.NewLevelStarted -= _combat.OnNewLevelStarted;
             
             _combat.OutOfHealth -= _player.Disable;

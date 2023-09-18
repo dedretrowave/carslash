@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Combat.Weapon.Arms.Base;
+using Core.Combat.Weapon.Arms.Base;
 using LevelProgression.Upgrades.Upgrades;
 using LevelProgression.Upgrades.Upgrades.Base;
 using UnityEngine;

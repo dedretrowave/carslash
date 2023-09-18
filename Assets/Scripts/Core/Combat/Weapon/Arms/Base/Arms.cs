@@ -1,14 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Combat.Weapon.Arms.Base
+namespace Core.Combat.Weapon.Arms.Base
 {
     public abstract class Arms : MonoBehaviour
     {
         [Header("Description")]
         [SerializeField] private string _name;
         [SerializeField] private string _description;
-        [SerializeField] protected Projectile.Projectile projectile;
         [SerializeField] protected int delayBetweenShotsInSecs = 2;
 
         public string Name => _name;
@@ -31,7 +30,15 @@ namespace Combat.Weapon.Arms.Base
             baseDamageIncrease = amount;
         }
 
-        protected void StartShooting()
+        public void StopShooting()
+        {
+            if (shootingRoutine == null) return;
+            
+            StopCoroutine(shootingRoutine);
+            shootingRoutine = null;
+        }
+
+        public void StartShooting()
         {
             shootingRoutine = StartCoroutine(Shoot());
         }

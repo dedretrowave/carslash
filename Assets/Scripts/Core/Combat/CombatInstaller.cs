@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Combat.Weapon.Arms.Base;
-using Combat.Weapon.Views;
 using Core.Combat.Components;
 using Core.Combat.Enemies.Presenter;
+using Core.Combat.Weapon;
+using Core.Combat.Weapon.Arms.Base;
 using Core.Player.Health.View;
 using DI;
 using LevelProgression.Upgrades.Events;
@@ -21,7 +21,7 @@ namespace Combat
         [SerializeField] private List<Arms> _defaultArms;
         [Header("Views")]
         [SerializeField] private HealthView _healthView;
-        [SerializeField] private WeaponContainer _weapon;
+        [SerializeField] private WeaponController _weapon;
 
         private UpgradesEventManager _upgradesEventManager;
 
@@ -65,8 +65,7 @@ namespace Combat
             _enemySpawners.ForEach(spawner =>
             {
                 if (spawner.LevelToBeginSpawn > levelIndex) return;
-
-                Debug.Log(levelIndex);
+                
                 if (spawner.IsSpawnedInLevelIntervals)
                 {
                     if (levelIndex % spawner.LevelToBeginSpawn == 0)
@@ -113,7 +112,14 @@ namespace Combat
         {
             float enemySpawnTimeCut = .2f;
             _enemySpawners.ForEach(spawner => spawner.ReduceTimeSpan(enemySpawnTimeCut));
+            _weapon.StartShooting();
             StartEnemySpawn(levelIndex);
+        }
+
+        public void OnLevelEnded()
+        {
+            ClearEnemies();
+            _weapon.StopShooting();
         }
 
         public void ClearEnemies()

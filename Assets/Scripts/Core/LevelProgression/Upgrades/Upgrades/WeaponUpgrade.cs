@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Combat.Weapon.Arms.Base;
+using Core.Combat.Weapon.Arms.Base;
 using LevelProgression.Upgrades.Upgrades.Base;
 
 namespace LevelProgression.Upgrades.Upgrades

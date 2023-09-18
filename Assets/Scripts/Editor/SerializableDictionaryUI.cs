@@ -1,4 +1,4 @@
-using Combat.Weapon.Views;
+using Core.Combat.Weapon;
 using Core.Shops.SkinShop;
 using UnityEditor;
 

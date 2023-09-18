@@ -1,11 +1,13 @@
 using System.Collections;
+using Core.Combat.Weapon.Arms.Projectile;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Combat.Weapon.Arms
+namespace Core.Combat.Weapon.Arms
 {
-    public class Gatling : global::Combat.Weapon.Arms.Base.Arms
+    public class Gatling : Base.Arms
     {
+        [SerializeField] private MovingProjectile _projectilePrefab;
         [SerializeField] private int _minProjectilesAmount;
         [SerializeField] private int _maxProjectilesAmount;
         [SerializeField] private float _shootingSpread = 5;
@@ -26,8 +28,8 @@ namespace Combat.Weapon.Arms
                                             + transform.right 
                                             * Random.Range(-_shootingSpread, _shootingSpread);
                 
-                global::Combat.Weapon.Arms.Projectile.Projectile spawnedProjectile = 
-                    Instantiate(projectile, transform.position, transform.rotation);
+                MovingProjectile spawnedProjectile = 
+                    Instantiate(_projectilePrefab, transform.position, transform.rotation);
                 
                 spawnedProjectile.SetDirection(shootingDirection);
                 spawnedProjectile.IncreaseDamage(baseDamageIncrease);
