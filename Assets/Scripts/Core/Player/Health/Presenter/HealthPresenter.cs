@@ -1,6 +1,6 @@
 using System;
+using Core.Player.Health.View;
 using Player.Health.Model;
-using Player.Health.View;
 
 namespace Player.Health.Presenter
 {

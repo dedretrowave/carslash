@@ -47,11 +47,16 @@ namespace Core.Combat.Enemies.Presenter
             _view.CleanDestroy();
         }
 
-        public void Destroy()
+        private void Destroy()
         {
             Destroyed?.Invoke(this);
             Disable();
             _view.Destroy();
+        }
+
+        public void OnAttack(Transform player)
+        {
+            Destroy();
         }
 
         public void TakeDamage(float amount)

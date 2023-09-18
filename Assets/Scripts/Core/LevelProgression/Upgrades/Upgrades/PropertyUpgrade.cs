@@ -25,7 +25,7 @@ namespace LevelProgression.Upgrades.Upgrades
         {
             IsAd = true;
             _increaseAmount *= 1.5f;
-            buff = _increaseAmount;
+            buff = MathF.Round(_increaseAmount);
             SetDescription();
         }
         

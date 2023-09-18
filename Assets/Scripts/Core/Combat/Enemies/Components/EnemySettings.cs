@@ -8,10 +8,10 @@ namespace Core.Combat.Enemies.Components
     {
         [SerializeField] private float _maxHealth;
         [SerializeField] private int _levelToBeginSpawn;
-        [SerializeField] private bool _isSpawnedOncePerLevel;
+        [SerializeField] private bool _isSpawnedInLevelIntervals;
 
         public float MaxHealth => _maxHealth;
         public int LevelToBeginSpawn => _levelToBeginSpawn;
-        public bool IsSpawnedOncePerLevel => _isSpawnedOncePerLevel;
+        public bool IsSpawnedInLevelIntervals => _isSpawnedInLevelIntervals;
     }
 }

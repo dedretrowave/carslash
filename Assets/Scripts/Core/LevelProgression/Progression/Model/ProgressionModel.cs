@@ -1,7 +1,6 @@
-using System;
 using LevelProgression.Progression.Settings;
 
-namespace LevelProgression.Progression.Model
+namespace Core.LevelProgression.Progression.Model
 {
     public class ProgressionModel
     {

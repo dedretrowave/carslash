@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Combat.Weapon.Arms.Base;
 using Combat.Weapon.Views;
 using Core.Combat.Components;
 using Core.Combat.Enemies.Presenter;
+using Core.Player.Health.View;
 using DI;
 using LevelProgression.Upgrades.Events;
 using Player.Health.Presenter;
-using Player.Health.View;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Upgrades.Components;
 
 namespace Combat
@@ -61,11 +59,48 @@ namespace Combat
             _health.OutOfHealth -= OnOutOfHealth;
             _health.Disable();
         }
+        
+        private void StartEnemySpawn(int levelIndex)
+        {
+            _enemySpawners.ForEach(spawner =>
+            {
+                if (spawner.LevelToBeginSpawn > levelIndex) return;
+
+                Debug.Log(levelIndex);
+                if (spawner.IsSpawnedInLevelIntervals)
+                {
+                    if (levelIndex % spawner.LevelToBeginSpawn == 0)
+                    {
+                        spawner.StartEnemySpawn();
+                    }
+
+                    return;
+                }
+                
+                spawner.StartEnemySpawn();
+            });
+        }
 
         private void OnEnemySpawned(EnemyPresenter enemy)
         {
+            
             enemy.Collide += OnEnemyAttack;
             enemy.Destroyed += UnsubscribeFromEnemy;
+        }
+
+        private void OnEnemyAttack(Transform collision, EnemyPresenter enemy)
+        {
+            if (!collision.Equals(_player)) return;
+
+            UnsubscribeFromEnemy(enemy);
+            enemy.OnAttack(_player);
+            _health.Reduce();
+        }
+
+        private void UnsubscribeFromEnemy(EnemyPresenter enemy)
+        {
+            enemy.Collide -= OnEnemyAttack;
+            enemy.Destroyed -= UnsubscribeFromEnemy;
         }
         
         private void OnOutOfHealth()
@@ -81,37 +116,10 @@ namespace Combat
             StartEnemySpawn(levelIndex);
         }
 
-        private void OnEnemyAttack(Transform collision, EnemyPresenter enemy)
-        {
-            if (collision.Equals(_player))
-            {
-                UnsubscribeFromEnemy(enemy);
-                enemy.Destroy();
-                _health.Reduce();
-            }
-        }
-        
         public void ClearEnemies()
         {
             _enemySpawners.ForEach(spawner => spawner.StopEnemySpawn());
             _enemySpawners.ForEach(spawner => spawner.Clear());
-        }
-        
-        private void StartEnemySpawn(int levelIndex)
-        {
-            _enemySpawners.ForEach(spawner =>
-            {
-                if (spawner.LevelToBeginSpawn <= levelIndex)
-                {
-                    spawner.StartEnemySpawn();
-                }
-            });
-        }
-    
-        private void UnsubscribeFromEnemy(EnemyPresenter enemy)
-        {
-            enemy.Collide -= OnEnemyAttack;
-            enemy.Destroyed -= UnsubscribeFromEnemy;
         }
     }
 }

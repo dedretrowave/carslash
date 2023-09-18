@@ -1,6 +1,6 @@
 using System;
+using Core.LevelProgression.Progression.Model;
 using Core.LevelProgression.Progression.View;
-using LevelProgression.Progression.Model;
 using LevelProgression.Progression.Settings;
 
 namespace Core.LevelProgression.Progression.Presenter

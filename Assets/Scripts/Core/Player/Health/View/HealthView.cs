@@ -3,7 +3,7 @@ using Player.Health.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Player.Health.View
+namespace Core.Player.Health.View
 {
     public class HealthView : MonoBehaviour
     {

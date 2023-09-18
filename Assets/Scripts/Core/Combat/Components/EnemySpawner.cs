@@ -11,16 +11,17 @@ namespace Core.Combat.Components
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private EnemyView _enemyPrefab;
-        [SerializeField] private List<Transform> _spawnPoints;
-        [SerializeField] private Transform _player;
+        [SerializeField] protected EnemyView _enemyPrefab;
+        [SerializeField] protected List<Transform> _spawnPoints;
+        [SerializeField] protected Transform _player;
         [SerializeField] private float _spawnTimeSpan = 5;
-        [SerializeField] private EnemySettings _settings;
+        [SerializeField] protected EnemySettings _settings;
 
-        private List<EnemyPresenter> _enemies = new();
+        protected List<EnemyPresenter> _enemies = new();
         private bool _canSpawn;
 
         public int LevelToBeginSpawn => _settings.LevelToBeginSpawn;
+        public bool IsSpawnedInLevelIntervals => _settings.IsSpawnedInLevelIntervals;
 
         public event Action<EnemyPresenter> EnemySpawned;
 
@@ -54,11 +55,11 @@ namespace Core.Combat.Components
             yield return SpawnContinuously();
         }
 
-        private EnemyPresenter Spawn()
+        protected EnemyPresenter Spawn()
         {
             Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
             EnemyView enemyView = Instantiate(_enemyPrefab, spawnPoint);
-
+            
             EnemyPresenter enemy = new(enemyView, _player, _settings);
 
             enemy.Destroyed += Remove;
@@ -79,7 +80,7 @@ namespace Core.Combat.Components
             _enemies.Clear();
         }
 
-        private void Remove(EnemyPresenter enemy)
+        protected void Remove(EnemyPresenter enemy)
         {
             enemy.Destroyed -= Remove;
             _enemies.Remove(enemy);

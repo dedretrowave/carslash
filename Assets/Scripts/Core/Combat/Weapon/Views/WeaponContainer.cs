@@ -23,7 +23,6 @@ namespace Combat.Weapon.Views
                     Transform newPoint = _arms.ElementAt(_weaponOverrideIndex).Key;
                     Destroy(_arms[newPoint].gameObject);
                     _arms[newPoint] = Instantiate(newArms, newPoint);
-                    Debug.Log(_arms[newPoint].name);
                     _arms[newPoint].SetDamageIncrease(_baseDamageIncreaseRate);
                     _weaponOverrideIndex++;
                     return;
