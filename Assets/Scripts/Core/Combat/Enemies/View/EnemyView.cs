@@ -20,7 +20,7 @@ namespace Core.Combat.Enemies.View
             _followTarget = target;
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             Collide?.Invoke(other.transform);
         }
