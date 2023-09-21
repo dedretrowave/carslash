@@ -6,8 +6,8 @@ namespace Player.Skin
     [Serializable]
     public class SkinSettings
     {
-        [SerializeField] private Components.Skin _defaultSkin;
+        [SerializeField] private Core.Player.Skin.Components.Skin _defaultSkin;
 
-        public Components.Skin DefaultSkin => _defaultSkin;
+        public Core.Player.Skin.Components.Skin DefaultSkin => _defaultSkin;
     }
 }

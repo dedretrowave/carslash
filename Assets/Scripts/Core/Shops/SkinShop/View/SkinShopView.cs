@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Core.Player.Skin.Components;
 using Core.Shops.SkinShop.Components;
-using Player.Skin.Components;
 using UnityEngine;
 using UnityEngine.UI;
 

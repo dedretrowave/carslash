@@ -2,9 +2,9 @@ namespace Player.Skin.Model
 {
     public class SkinModel
     {
-        private Components.Skin _skin;
+        private Core.Player.Skin.Components.Skin _skin;
 
-        public Components.Skin Skin => _skin;
+        public Core.Player.Skin.Components.Skin Skin => _skin;
 
         public SkinModel(SkinSettings settings)
         {
@@ -12,7 +12,7 @@ namespace Player.Skin.Model
             Set(settings.DefaultSkin);
         }
 
-        public void Set(Components.Skin skin)
+        public void Set(Core.Player.Skin.Components.Skin skin)
         {
             _skin = skin;
         }

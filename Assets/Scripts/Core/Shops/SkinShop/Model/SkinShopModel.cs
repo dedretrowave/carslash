@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Core.Player.Skin.Components;
 using Core.Shops.SkinShop.Components;
 using Newtonsoft.Json;
-using Player.Skin.Components;
 
 namespace Core.Shops.SkinShop.Model
 {

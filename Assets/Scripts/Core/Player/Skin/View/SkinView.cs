@@ -6,7 +6,7 @@ namespace Player.Skin.View
     {
         [SerializeField] private Transform _childContainer;
         
-        public void Show(Components.Skin skin)
+        public void Show(Core.Player.Skin.Components.Skin skin)
         {
             Transform child = null;
             

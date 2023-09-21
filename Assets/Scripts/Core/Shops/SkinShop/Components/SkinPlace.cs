@@ -1,5 +1,5 @@
 using System;
-using Player.Skin.Components;
+using Core.Player.Skin.Components;
 using Player.Skin.View;
 using UnityEngine;
 

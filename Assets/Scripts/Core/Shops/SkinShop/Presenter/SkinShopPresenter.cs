@@ -1,7 +1,7 @@
 using System;
+using Core.Player.Skin.Components;
 using Core.Shops.SkinShop.Model;
 using Core.Shops.SkinShop.View;
-using Player.Skin.Components;
 
 namespace Core.Shops.SkinShop.Presenter
 {

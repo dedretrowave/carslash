@@ -5,6 +5,9 @@ using Core.Combat.Enemies.Presenter;
 using Core.Combat.Weapon;
 using Core.Combat.Weapon.Arms.Base;
 using Core.Player.Health.View;
+using Core.Player.InvincibilityFrame;
+using Core.Player.InvincibilityFrame.Presenter;
+using Core.Player.InvincibilityFrame.View;
 using DI;
 using LevelProgression.Upgrades.Events;
 using Player.Health.Presenter;
@@ -22,10 +25,13 @@ namespace Combat
         [Header("Views")]
         [SerializeField] private HealthView _healthView;
         [SerializeField] private WeaponController _weapon;
+        [SerializeField] private InvincibilityFrameView _invincibilityFrameView;
+        [SerializeField] private InvincibilityFrameSettings _invincibilityFrameSettings;
 
         private UpgradesEventManager _upgradesEventManager;
 
         private HealthPresenter _health;
+        private InvincibilityFramePresenter _invincibilityFrame;
 
         public event Action OutOfHealth;
 
@@ -34,8 +40,13 @@ namespace Combat
             _upgradesEventManager = DependencyContext.Dependencies.Get<UpgradesEventManager>();
             
             _health = new(_healthView);
+            _invincibilityFrame = new(_invincibilityFrameSettings, _invincibilityFrameView);
 
-            _weapon.Deploy(_defaultArms[0]);
+            foreach (Arms defaultArms in _defaultArms)
+            {
+                _weapon.Deploy(defaultArms);
+            }
+            
             _enemySpawners.ForEach(spawner => spawner.EnemySpawned += OnEnemySpawned);
 
             _upgradesEventManager.Subscribe<float>(UpgradeType.HealthAmount, _health.Add);
@@ -82,18 +93,19 @@ namespace Combat
 
         private void OnEnemySpawned(EnemyPresenter enemy)
         {
-            
             enemy.Collide += OnEnemyAttack;
             enemy.Destroyed += UnsubscribeFromEnemy;
         }
 
         private void OnEnemyAttack(Transform collision, EnemyPresenter enemy)
         {
-            if (!collision.Equals(_player)) return;
+            if (!collision.Equals(_player)
+            || _invincibilityFrame.IsActive) return;
 
             UnsubscribeFromEnemy(enemy);
             enemy.OnAttack(_player);
             _health.Reduce();
+            _invincibilityFrame.Activate();
         }
 
         private void UnsubscribeFromEnemy(EnemyPresenter enemy)

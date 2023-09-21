@@ -8,6 +8,9 @@ namespace Player.Movement.View
         private const float TweenMoveSpeed = 1;
         private const float TweenTurnSpeed = .3f;
         
+        private float currentSteerAngle, currentbreakForce; 
+        private bool isBreaking;
+
         private Vector3 _direction;
         private float _speed;
 
@@ -17,12 +20,14 @@ namespace Player.Movement.View
             _speed = speed;
         }
 
+        private float _timeValue;
+        
         private void FixedUpdate()
         {
             Vector3 movement = transform.position + _direction * (_speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, movement) <= 1f) return;
-            
+
             transform.DOMove(movement, TweenMoveSpeed);
             transform.DOLookAt(movement, TweenTurnSpeed);
         }

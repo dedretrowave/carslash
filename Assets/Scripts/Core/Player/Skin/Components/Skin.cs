@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Player.Skin.Components
+namespace Core.Player.Skin.Components
 {
     public class Skin : MonoBehaviour
     {

@@ -29,7 +29,7 @@ namespace Core.Player
             _upgradesEventManager = DependencyContext.Dependencies.Get<UpgradesEventManager>();
             
             _input = new();
-            _skin = new(_skinView, _skinSettings);
+            // _skin = new(_skinView, _skinSettings);
             _movement = new(_movementView, _movementSettings);
 
             if (_upgradesEventManager != null)
