@@ -1,15 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Player.Movement.View
+namespace Core.Player.Movement.View
 {
     public class MovementView : MonoBehaviour
     {
         private const float TweenMoveSpeed = 1;
-        private const float TweenTurnSpeed = .3f;
-        
-        private float currentSteerAngle, currentbreakForce; 
-        private bool isBreaking;
+        private const float TweenTurnSpeed = .5f;
 
         private Vector3 _direction;
         private float _speed;

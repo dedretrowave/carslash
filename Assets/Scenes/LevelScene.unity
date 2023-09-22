@@ -724,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 602197685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59, z: 0}
+  m_LocalPosition: {x: 0, y: 1.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -758,7 +758,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &602197688
 MonoBehaviour:
@@ -787,7 +787,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2879,7 +2879,7 @@ MonoBehaviour:
   _spawnTimeSpan: 5
   _settings:
     _maxHealth: 50
-    _levelToBeginSpawn: 3
+    _levelToBeginSpawn: 5
     _isSpawnedInLevelIntervals: 0
 --- !u!1 &2099627059
 GameObject:

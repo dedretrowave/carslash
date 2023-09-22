@@ -10,9 +10,10 @@ namespace Core.Combat.Enemies.Presenter
         public BossPresenter(EnemyView view, Transform player, EnemySettings settings) : base(view, player, settings)
         { }
 
-        public new void OnAttack(Transform player)
+        public override void OnAttack(Transform player)
         {
-            player.DOMove(-player.forward, 1f);
+            Vector3 pushPosition = player.position + View.transform.forward * 10f;
+            player.DOMove(pushPosition, 1f);
             TakeDamage(10f);
         }
     }

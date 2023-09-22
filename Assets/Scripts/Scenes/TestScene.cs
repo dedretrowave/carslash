@@ -1,7 +1,6 @@
 using System;
 using Core.Player;
 using Player.Movement.Presenter;
-using Player.Movement.View;
 using UnityEngine;
 
 namespace Scenes

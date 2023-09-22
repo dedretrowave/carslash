@@ -1,7 +1,7 @@
+using Core.Player.Movement.View;
 using LevelProgression.Upgrades.Events;
 using Player.Movement.Model;
 using Player.Movement.Presenter;
-using Player.Movement.View;
 using UnityEngine;
 
 namespace Core.Player

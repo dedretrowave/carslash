@@ -6,13 +6,13 @@ namespace Core.Combat.Enemies.View
 {
     public class EnemyView : MonoBehaviour
     {
-        [SerializeField] private Transform _explosionPrefab;
         [SerializeField] private MoneySpawner _moneySpawner;
-
-        private float _tweenSpeed = 10f;
+        [SerializeField] private EnemyAnimations _enemyAnimations;
+        [SerializeField] private float _speed = 5f;
+        
         private Transform _followTarget;
 
-        public event Action<float> Damage;
+        public event Action<float> DamageTaken;
         public event Action<Transform> Collide;
 
         public void Follow(Transform target)
@@ -27,7 +27,7 @@ namespace Core.Combat.Enemies.View
 
         public void TakeDamage(float damage)
         {
-            Damage?.Invoke(damage);
+            DamageTaken?.Invoke(damage);
         }
 
         public void CleanDestroy()
@@ -37,15 +37,17 @@ namespace Core.Combat.Enemies.View
 
         public void Destroy()
         {
+            _followTarget = null;
+            _enemyAnimations.PlayDead();
             _moneySpawner.Spawn();
-            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
         }
 
         private void FixedUpdate()
         {
+            if (_followTarget == null) return;
+            
             Vector3 direction = Vector3.Normalize(_followTarget.position - transform.position);
-            transform.position += direction * _tweenSpeed * Time.deltaTime;
+            transform.position += direction * _speed * Time.deltaTime;
             transform.LookAt(_followTarget.position);
         }
     }

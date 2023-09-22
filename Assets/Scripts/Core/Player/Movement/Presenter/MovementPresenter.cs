@@ -1,5 +1,5 @@
+using Core.Player.Movement.View;
 using Player.Movement.Model;
-using Player.Movement.View;
 using UnityEngine;
 
 namespace Player.Movement.Presenter

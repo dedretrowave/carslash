@@ -10,7 +10,7 @@ namespace Core.Combat.Enemies.Presenter
     {
         private EnemyModel _model;
         
-        private EnemyView _view;
+        protected EnemyView View;
 
         public event Action<Transform, EnemyPresenter> Collide;
         public event Action<EnemyPresenter> Destroyed;
@@ -19,19 +19,19 @@ namespace Core.Combat.Enemies.Presenter
         {
             _model = new(settings);
             
-            _view = view;
+            View = view;
             
-            _view.Follow(player);
+            View.Follow(player);
 
-            _view.Collide += OnCollision;
-            _view.Damage += TakeDamage;
+            View.Collide += OnCollision;
+            View.DamageTaken += TakeDamage;
             _model.OutOfHealth += Destroy;
         }
 
         private void Disable()
         {
-            _view.Collide -= OnCollision;
-            _view.Damage -= TakeDamage;
+            View.Collide -= OnCollision;
+            View.DamageTaken -= TakeDamage;
             _model.OutOfHealth -= Destroy;
         }
 
@@ -44,17 +44,17 @@ namespace Core.Combat.Enemies.Presenter
         {
             Destroyed?.Invoke(this);
             Disable();
-            _view.CleanDestroy();
+            View.CleanDestroy();
         }
 
         private void Destroy()
         {
             Destroyed?.Invoke(this);
             Disable();
-            _view.Destroy();
+            View.Destroy();
         }
 
-        public void OnAttack(Transform player)
+        public virtual void OnAttack(Transform player)
         {
             Destroy();
         }

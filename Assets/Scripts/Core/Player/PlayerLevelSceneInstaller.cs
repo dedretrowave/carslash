@@ -1,8 +1,8 @@
+using Core.Player.Movement.View;
 using DI;
 using LevelProgression.Upgrades.Events;
 using Player.Movement.Model;
 using Player.Movement.Presenter;
-using Player.Movement.View;
 using Player.Skin;
 using Player.Skin.Presenter;
 using Player.Skin.View;

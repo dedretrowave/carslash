@@ -102,7 +102,6 @@ namespace Combat
             if (!collision.Equals(_player)
             || _invincibilityFrame.IsActive) return;
 
-            UnsubscribeFromEnemy(enemy);
             enemy.OnAttack(_player);
             _health.Reduce();
             _invincibilityFrame.Activate();

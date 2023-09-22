@@ -6,23 +6,19 @@ namespace Core.Combat.Components
 {
     public class BossSpawner : EnemySpawner
     {
-        public new void StartEnemySpawn()
+        public override void StartEnemySpawn()
         {
             Spawn();
         }
         
-        protected new BossPresenter Spawn()
+        protected override void Spawn()
         {
             Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
             EnemyView enemyView = Instantiate(_enemyPrefab, spawnPoint);
             
             BossPresenter enemy = new(enemyView, _player, _settings);
 
-            enemy.Destroyed += Remove;
-            
-            _enemies.Add(enemy);
-
-            return enemy;
+            OnEnemySpawned(enemy);
         }
     }
 }

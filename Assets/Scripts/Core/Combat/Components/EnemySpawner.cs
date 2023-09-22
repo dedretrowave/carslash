@@ -30,7 +30,7 @@ namespace Core.Combat.Components
             _spawnTimeSpan -= amount;
         }
 
-        public void StartEnemySpawn()
+        public virtual void StartEnemySpawn()
         {
             if (!_canSpawn) _canSpawn = true;
         
@@ -46,16 +46,14 @@ namespace Core.Combat.Components
         {
             if (!_canSpawn) yield break;
         
-            EnemyPresenter enemy = Spawn();
-            
-            EnemySpawned?.Invoke(enemy);
+            Spawn();
 
             yield return new WaitForSeconds(_spawnTimeSpan);
 
             yield return SpawnContinuously();
         }
 
-        protected EnemyPresenter Spawn()
+        protected virtual void Spawn()
         {
             Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
             EnemyView enemyView = Instantiate(_enemyPrefab, spawnPoint);
@@ -66,7 +64,12 @@ namespace Core.Combat.Components
             
             _enemies.Add(enemy);
 
-            return enemy;
+            EnemySpawned?.Invoke(enemy);
+        }
+
+        protected void OnEnemySpawned(EnemyPresenter thisEnemy)
+        {
+            EnemySpawned?.Invoke(thisEnemy);
         }
 
         public void Clear()
@@ -80,7 +83,7 @@ namespace Core.Combat.Components
             _enemies.Clear();
         }
 
-        protected void Remove(EnemyPresenter enemy)
+        private void Remove(EnemyPresenter enemy)
         {
             enemy.Destroyed -= Remove;
             _enemies.Remove(enemy);
