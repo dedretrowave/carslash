@@ -512,7 +512,7 @@ MonoBehaviour:
   - {fileID: 2082595676}
   _player: {fileID: 602197686}
   _defaultArms:
-  - {fileID: 3471266365613095292, guid: dd057d41439d50f47a8e3905ec30349e, type: 3}
+  - {fileID: -7990903771744586883, guid: 6e60959fd70773d47bb0d5b1eb2dd0da, type: 3}
   _healthView: {fileID: 578767280}
   _weapon: {fileID: 977241929}
   _invincibilityFrameView: {fileID: 1466992792}
@@ -724,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 602197685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.73, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2032,7 +2032,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1330131809
 MonoBehaviour:

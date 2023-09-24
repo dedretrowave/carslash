@@ -32,10 +32,11 @@ namespace Core.Combat.Weapon.Arms
             Vector3 shootingDirection = Vector3.Normalize(_selectedEnemy.transform.position - transform.position);
             
             MovingProjectile spawnedProjectile = 
-                 Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+                 Instantiate(_projectilePrefab, MuzzlePosition, Quaternion.identity);
             
             spawnedProjectile.SetDirection(shootingDirection);
             spawnedProjectile.IncreaseDamage(baseDamageIncrease);
+            OnShoot();
             
             _selectedEnemy = null;
 

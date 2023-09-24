@@ -15,6 +15,7 @@ namespace Core.Combat.Weapon.Arms
         protected override IEnumerator Shoot()
         {
             Instantiate(_minesPrefab, transform.position, Quaternion.identity);
+            OnShoot();
             yield return new WaitForSeconds(delayBetweenShotsInSecs);
             yield return Shoot();
         }

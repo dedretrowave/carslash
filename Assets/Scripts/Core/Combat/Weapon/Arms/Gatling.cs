@@ -29,14 +29,15 @@ namespace Core.Combat.Weapon.Arms
                                             * Random.Range(-_shootingSpread, _shootingSpread);
                 
                 MovingProjectile spawnedProjectile = 
-                    Instantiate(_projectilePrefab, transform.position, transform.rotation);
+                    Instantiate(_projectilePrefab, MuzzlePosition, transform.rotation);
                 
                 spawnedProjectile.SetDirection(shootingDirection);
                 spawnedProjectile.IncreaseDamage(baseDamageIncrease);
                 
+                OnShoot();
                 yield return new WaitForSeconds(1 / _shootingRate);
             }
-
+            
             yield return new WaitForSeconds(delayBetweenShotsInSecs);
             yield return Shoot();
         }
