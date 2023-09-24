@@ -512,7 +512,7 @@ MonoBehaviour:
   - {fileID: 2082595676}
   _player: {fileID: 602197686}
   _defaultArms:
-  - {fileID: -7990903771744586883, guid: 6e60959fd70773d47bb0d5b1eb2dd0da, type: 3}
+  - {fileID: 3249307641171189380, guid: 06618d1d746f57049a19f2ecfea957ab, type: 3}
   _healthView: {fileID: 578767280}
   _weapon: {fileID: 977241929}
   _invincibilityFrameView: {fileID: 1466992792}

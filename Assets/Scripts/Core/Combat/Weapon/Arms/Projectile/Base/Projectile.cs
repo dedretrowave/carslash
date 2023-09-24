@@ -5,21 +5,26 @@ namespace Core.Combat.Weapon.Arms.Projectile.Base
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private Transform _impactPrefab;
+        [SerializeField] protected Transform impactPrefab;
         
-        [SerializeField] private float _damage;
+        [SerializeField] protected float damage;
 
         public void IncreaseDamage(float amount)
         {
-            _damage *= amount;
+            damage *= amount;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.transform.TryGetComponent(out EnemyView enemy)) return;
             
-            enemy.TakeDamage(_damage);
-            Instantiate(_impactPrefab, transform.position, Quaternion.identity);
+            Damage(enemy);
+        }
+
+        protected virtual void Damage(EnemyView enemy)
+        {
+            enemy.TakeDamage(damage);
+            Instantiate(impactPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

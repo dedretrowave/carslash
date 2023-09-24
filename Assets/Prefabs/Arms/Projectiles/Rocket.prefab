@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2feecfe3ca4f46a5b29d9383c79b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactPrefab: {fileID: 4773403894528304, guid: f7cd9933cd24ebb41a2f6daa647b226a, type: 3}
-  _damage: 10
+  impactPrefab: {fileID: 4773403894528304, guid: f7cd9933cd24ebb41a2f6daa647b226a, type: 3}
+  damage: 10
   _speed: 25
   _travelEdgeX: 200
   _travelEdgeZ: 200
