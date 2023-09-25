@@ -62,6 +62,7 @@ namespace Core.Combat.Enemies.Presenter
         public void TakeDamage(float amount)
         {
             _model.ReduceHealth(amount);
+            View.TakeDamage();
         }
     }
 }

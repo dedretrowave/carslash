@@ -7,11 +7,6 @@ namespace Core.Combat.Weapon.Arms
     {
         [SerializeField] private Projectile.Base.Projectile _minesPrefab;
 
-        private void Start()
-        {
-            StartShooting();
-        }
-
         protected override IEnumerator Shoot()
         {
             Instantiate(_minesPrefab, transform.position, Quaternion.identity);

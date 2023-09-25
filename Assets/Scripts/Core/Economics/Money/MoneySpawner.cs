@@ -20,7 +20,7 @@ namespace Economics.Money
             {
                 Vector3 position = new(
                     Random.Range(_axisSpreadMin, _axisSpreadMax),
-                    0f,
+                    2f,
                     Random.Range(_axisSpreadMin, _axisSpreadMax));
                 
                 Instantiate(_moneyPrefab, transform.position + position, Quaternion.identity);

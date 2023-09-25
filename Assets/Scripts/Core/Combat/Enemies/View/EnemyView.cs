@@ -8,6 +8,7 @@ namespace Core.Combat.Enemies.View
     {
         [SerializeField] private MoneySpawner _moneySpawner;
         [SerializeField] private EnemyAnimations _enemyAnimations;
+        [SerializeField] private Collider _collider;
         [SerializeField] private float _speed = 5f;
         
         private Transform _followTarget;
@@ -30,6 +31,11 @@ namespace Core.Combat.Enemies.View
             DamageTaken?.Invoke(damage);
         }
 
+        public void TakeDamage()
+        {
+            _enemyAnimations.PlayHurt();
+        }
+
         public void CleanDestroy()
         {
             Destroy(gameObject);
@@ -40,6 +46,7 @@ namespace Core.Combat.Enemies.View
             _followTarget = null;
             _enemyAnimations.PlayDead();
             _moneySpawner.Spawn();
+            _collider.enabled = false;
         }
 
         private void FixedUpdate()

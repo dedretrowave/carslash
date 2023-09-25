@@ -1,5 +1,6 @@
 using System;
 using LevelProgression.Upgrades.Upgrades.Base;
+using UnityEngine;
 
 namespace LevelProgression.Upgrades.Upgrades
 {
@@ -24,8 +25,8 @@ namespace LevelProgression.Upgrades.Upgrades
         public override void DoubleBuff()
         {
             IsAd = true;
-            _increaseAmount *= 1.5f;
-            buff = MathF.Round(_increaseAmount);
+            _increaseAmount = Mathf.Round(_increaseAmount * 1.5f);
+            buff = _increaseAmount;
             SetDescription();
         }
         

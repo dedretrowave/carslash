@@ -5,17 +5,21 @@ namespace Core.Combat.Enemies.View
     public class EnemyAnimations : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private float _chanceOfCrawl = 50f;
+        [SerializeField] private int _walkingAnimationsCount;
 
-        private bool _isCrawling;
-        
-        private static readonly int IsCrawlingKey = Animator.StringToHash("IsCrawling");
+        private static readonly int WalkingIndexKey = Animator.StringToHash("WalkingIndex");
         private static readonly int IsDeadKey = Animator.StringToHash("IsDead");
+        private static readonly int TakeDamageKey = Animator.StringToHash("TakeDamage");
 
         private void Awake()
         {
-            _isCrawling = Random.Range(0, 100f) < _chanceOfCrawl;
-            _animator.SetBool(IsCrawlingKey, _isCrawling);
+            int index = Random.Range(0, _walkingAnimationsCount);
+            _animator.SetInteger(WalkingIndexKey, index);
+        }
+
+        public void PlayHurt()
+        {
+            _animator.SetTrigger(TakeDamageKey);
         }
 
         public void PlayDead()

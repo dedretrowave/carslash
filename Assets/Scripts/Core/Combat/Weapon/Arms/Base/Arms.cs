@@ -48,6 +48,8 @@ namespace Core.Combat.Weapon.Arms.Base
 
         public void StartShooting()
         {
+            StopShooting();
+            
             shootingRoutine = StartCoroutine(Shoot());
         }
 
