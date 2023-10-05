@@ -6,6 +6,11 @@ namespace Core.Combat.Weapon.Arms
     public class Miner : Base.Arms
     {
         [SerializeField] private Projectile.Base.Projectile _minesPrefab;
+        
+        private void Start()
+        {
+            StartShooting();
+        }
 
         protected override IEnumerator Shoot()
         {

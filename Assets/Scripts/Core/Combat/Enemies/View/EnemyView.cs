@@ -6,11 +6,11 @@ namespace Core.Combat.Enemies.View
 {
     public class EnemyView : MonoBehaviour
     {
+        [SerializeField] private UnityEngine.AI.NavMeshAgent _navMesh;
         [SerializeField] private MoneySpawner _moneySpawner;
         [SerializeField] private EnemyAnimations _enemyAnimations;
         [SerializeField] private Collider _collider;
-        [SerializeField] private float _speed = 5f;
-        
+
         private Transform _followTarget;
 
         public event Action<float> DamageTaken;
@@ -44,6 +44,7 @@ namespace Core.Combat.Enemies.View
         public void Destroy()
         {
             _followTarget = null;
+            _navMesh.destination = transform.position;
             _enemyAnimations.PlayDead();
             _moneySpawner.Spawn();
             _collider.enabled = false;
@@ -53,9 +54,10 @@ namespace Core.Combat.Enemies.View
         {
             if (_followTarget == null) return;
             
-            Vector3 direction = Vector3.Normalize(_followTarget.position - transform.position);
-            transform.position += direction * _speed * Time.deltaTime;
-            transform.LookAt(_followTarget.position);
+            _navMesh.destination = _followTarget.position;
+            // Vector3 direction = Vector3.Normalize(_followTarget.position - transform.position);
+            // transform.position += direction * _speed * Time.deltaTime;
+            // transform.LookAt(_followTarget.position);
         }
     }
 }

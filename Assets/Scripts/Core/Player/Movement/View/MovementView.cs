@@ -1,12 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Core.Player.Movement.View
 {
     public class MovementView : MonoBehaviour
     {
-        private const float TweenMoveSpeed = 1;
-        private const float TweenTurnSpeed = .5f;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private float _turnSpeed = 200f;
 
         private Vector3 _direction;
         private float _speed;
@@ -21,12 +22,15 @@ namespace Core.Player.Movement.View
         
         private void FixedUpdate()
         {
-            Vector3 movement = transform.position + _direction * (_speed * Time.deltaTime);
+            Vector3 movement = _direction * _speed;
 
-            if (Vector3.Distance(transform.position, movement) <= 1f) return;
-
-            transform.DOMove(movement, TweenMoveSpeed);
-            transform.DOLookAt(movement, TweenTurnSpeed);
+            if (movement != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(movement, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed);
+            }
+            
+            _rigidbody.velocity = movement;
         }
     }
 }
