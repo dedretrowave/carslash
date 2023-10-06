@@ -25,7 +25,7 @@ namespace Scenes
             _levelProgression.NewLevelStarted += _combat.OnNewLevelStarted;
 
             _combat.OutOfHealth += _player.Disable;
-            _combat.OutOfHealth += _levelProgression.OnLose;
+            _combat.OutOfHealth += _levelProgression.OnEnd;
         }
 
         private void OnDisable()
@@ -38,7 +38,7 @@ namespace Scenes
             _levelProgression.NewLevelStarted -= _combat.OnNewLevelStarted;
             
             _combat.OutOfHealth -= _player.Disable;
-            _combat.OutOfHealth -= _levelProgression.OnLose;
+            _combat.OutOfHealth -= _levelProgression.OnEnd;
         }
     }
 }

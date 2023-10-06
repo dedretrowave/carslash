@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4784425822655509586}
   - component: {fileID: 3530560409573713812}
   - component: {fileID: 8521395045846379237}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 6331423941873122069}
   - component: {fileID: 9032026994490597393}
   - component: {fileID: 8101248658997260833}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,11 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2feecfe3ca4f46a5b29d9383c79b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyAfterInSecs: 10
   impactPrefab: {fileID: 4726966518373130, guid: cb1ceab197b21204c8e9e26ec9c6843f, type: 3}
   damage: 5
   _speed: 50
-  _travelEdgeX: 200
-  _travelEdgeZ: 200
 --- !u!65 &8101248658997260833
 BoxCollider:
   m_ObjectHideFlags: 0

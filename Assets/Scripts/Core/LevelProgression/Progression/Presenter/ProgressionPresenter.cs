@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core.LevelProgression.Progression.Model;
 using Core.LevelProgression.Progression.View;
 using LevelProgression.Progression.Settings;
@@ -8,21 +9,28 @@ namespace Core.LevelProgression.Progression.Presenter
     public class ProgressionPresenter
     {
         private ProgressionModel _model;
-        private ProgressionView _view;
+        private List<ProgressView> _views;
 
         public event Action LevelPassed;
 
-        public ProgressionPresenter(ProgressionView view, ProgressionSettings settings)
+        public ProgressionPresenter(List<ProgressView> views, ProgressionSettings settings)
         {
             _model = new(settings);
-            _view = view;
+            _views = new(views);
+            
+            ShowViews();
+        }
+
+        public int GetMaxLevel()
+        {
+            return _model.MaxLevelReached;
         }
 
         public int IncreaseLevelAndReturn()
         {
             _model.IncreaseLevel();
-            _view.Fill(0);
-            return _model.CurrentLevel;
+            
+            return _model.CurrentLevel.Value;
         }
 
         public void IncreaseProgress(int amount = 1)
@@ -30,13 +38,22 @@ namespace Core.LevelProgression.Progression.Presenter
             if (_model.LevelIsPassed) return;
             
             _model.IncreaseProgress(amount);
-            float progressPercent = (_model.CurrentProgress * 100f / _model.ProgressCap) / 100f;
-            _view.Fill(progressPercent);
+            ShowViews();
 
             if (_model.LevelIsPassed)
             {
                 LevelPassed?.Invoke();
             }
+        }
+        
+        private void ShowViews()
+        {
+            if (_views.Count == 0) return;
+            
+            _views.ForEach(view =>
+            {
+                view.Show(_model.GetProgressInt(view.GetType()));
+            });
         }
     }
 }

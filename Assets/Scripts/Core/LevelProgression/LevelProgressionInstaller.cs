@@ -1,5 +1,7 @@
 using System;
 using Core.Economics.Wallet.Presenter;
+using Core.LevelProgression.EndScreen.Presenter;
+using Core.LevelProgression.EndScreen.View;
 using Core.LevelProgression.Progression.Presenter;
 using Core.LevelProgression.Progression.View;
 using DI;
@@ -20,6 +22,8 @@ namespace LevelProgression
         [SerializeField] private WalletView _walletView;
         [SerializeField] private UpgradesView _upgradesView;
         [SerializeField] private ProgressionView _progressionView;
+        [SerializeField] private MaxLevelView _maxLevelView;
+        [SerializeField] private EndScreenView _endScreenView;
         [Header("Settings")]
         [SerializeField] private UpgradesSettings _upgradesSettings;
         [SerializeField] private ProgressionSettings _progressionSettings;
@@ -28,6 +32,7 @@ namespace LevelProgression
         private WalletPresenter _wallet;
         private ProgressionPresenter _progression;
         private UpgradesEventManager _upgradeEventsManager;
+        private EndScreenPresenter _endScreen;
 
         public event Action LevelEnded;
         public event Action<int> NewLevelStarted;
@@ -35,10 +40,14 @@ namespace LevelProgression
         public void Construct()
         {
             _wallet = new(_walletView);
-            _progression = new(_progressionView, _progressionSettings);
+            _progression = new(
+                new () 
+                    {_maxLevelView, _progressionView},
+                _progressionSettings);
             _upgrades = new(_upgradesSettings, _upgradesView);
-            
+
             _upgradeEventsManager = new();
+            _endScreen = new(_endScreenView);
             
             DependencyContext.Dependencies.Add(
                 new(
@@ -57,9 +66,9 @@ namespace LevelProgression
             _upgrades.Selected -= OnUpgradeSelected;
         }
 
-        public void OnLose()
+        public void OnEnd()
         {
-            Debug.Log("LOSE(");
+            _endScreen.Show(_progression.GetMaxLevel());
         }
 
         private void OnUpgradeSelected(Upgrade upgrade)

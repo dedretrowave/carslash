@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7923657635990194810}
   - component: {fileID: 1518054754993121702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +98,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e3ed1ce7d944c09468ebd63c88c27732, type: 3}
       propertyPath: m_Name
       value: Sedan-0-scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e3ed1ce7d944c09468ebd63c88c27732, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: e3ed1ce7d944c09468ebd63c88c27732, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

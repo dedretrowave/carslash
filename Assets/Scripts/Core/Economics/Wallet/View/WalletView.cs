@@ -11,7 +11,7 @@ namespace Economics.Wallet.View
         [SerializeField] private TextMeshProUGUI _label;
         [SerializeField] private LayerMask _moneyLayerMask;
 
-        private const float MoneyTweenSpeedInSecs = .3f;
+        private const float MoneyTweenSpeedInSecs = 1f;
         private const int MoneyDestroyDelayInMilliSecs = 400;
 
         public event Action Pickup;
@@ -28,7 +28,7 @@ namespace Economics.Wallet.View
             Destroy(money.gameObject);
         }
 
-        public void CollectMoney(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             if ((_moneyLayerMask.value & (1 << other.gameObject.layer)) == 0) return;
 

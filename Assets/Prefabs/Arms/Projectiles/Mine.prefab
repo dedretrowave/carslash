@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3530560409573713812}
   - component: {fileID: 6436600990515192187}
   - component: {fileID: 3725965507903031015}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 842402381158607764}
   - component: {fileID: 6360103960381040678}
   - component: {fileID: 4659208924945919006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 6331423941873122069}
   - component: {fileID: 5200602623927918879}
   - component: {fileID: 8891255127006426514}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5305ff4438884b6186910e76403da4bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyAfterInSecs: 30
   impactPrefab: {fileID: 4053710069140964, guid: 840c2c3f5dc22104d8619ffd58d3d71b, type: 3}
   damage: 20
 --- !u!65 &8891255127006426514

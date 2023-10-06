@@ -15,8 +15,6 @@ namespace Core.Player
     {
         [SerializeField] private MovementSettings _movementSettings;
         [SerializeField] private MovementView _movementView;
-        [SerializeField] private SkinSettings _skinSettings;
-        [SerializeField] private SkinView _skinView;
 
         private Input.Input _input;
         private UpgradesEventManager _upgradesEventManager;
@@ -29,7 +27,6 @@ namespace Core.Player
             _upgradesEventManager = DependencyContext.Dependencies.Get<UpgradesEventManager>();
             
             _input = new();
-            // _skin = new(_skinView, _skinSettings);
             _movement = new(_movementView, _movementSettings);
 
             if (_upgradesEventManager != null)
@@ -44,6 +41,7 @@ namespace Core.Player
         {
             _upgradesEventManager.Unsubscribe<float>(UpgradeType.MoveSpeed, _movement.IncreaseMoveSpeed);
             _input.OnMove -= _movement.Move;
+            _movement.Move(Vector3.zero);
             _input.Disable();
         }
     }

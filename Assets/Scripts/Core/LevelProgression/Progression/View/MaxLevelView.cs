@@ -2,22 +2,21 @@ using System;
 using Core.LevelProgression.Progression.Model;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Core.LevelProgression.Progression.View
 {
-    public class ProgressionView : ProgressView
+    public class MaxLevelView : ProgressView
     {
-        [SerializeField] private Slider _slider;
+        [SerializeField] private TextMeshProUGUI _waveCount;
 
         public override Type GetType()
         {
-            return typeof(ProgressionInt);
+            return typeof(CurrentLevelInt);
         }
 
         public override void Show(ProgressInt value)
         {
-            _slider.value = value.Value;
+            _waveCount.text = value.Value.ToString();
         }
     }
 }

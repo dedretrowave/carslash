@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4015675968187482}
   - component: {fileID: 198987053374360312}
   - component: {fileID: 199234124397938860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Subexplosion
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
@@ -4812,7 +4812,7 @@ GameObject:
   - component: {fileID: 199881122785537400}
   - component: {fileID: 3877012176993376890}
   - component: {fileID: 5478671470935464799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MineExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

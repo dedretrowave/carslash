@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7808079903821641970}
   - component: {fileID: 4784425822655509586}
   - component: {fileID: 3530560409573713812}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6331423941873122069}
   - component: {fileID: 3160304671641720766}
   - component: {fileID: 4994156059209093177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,11 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2feecfe3ca4f46a5b29d9383c79b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyAfterInSecs: 20
   impactPrefab: {fileID: 4773403894528304, guid: f7cd9933cd24ebb41a2f6daa647b226a, type: 3}
   damage: 10
   _speed: 25
-  _travelEdgeX: 200
-  _travelEdgeZ: 200
 --- !u!135 &4994156059209093177
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,8 +153,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.19
+  m_Center: {x: 0, y: 0.58, z: 0}
 --- !u!1001 &6913754900584241363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,9 +163,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7808079903821641970}
     m_Modifications:
+    - target: {fileID: 1097847537322618, guid: 41ecb733b44c5214fa03fa1463f1f52f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1522835503591412, guid: 41ecb733b44c5214fa03fa1463f1f52f, type: 3}
       propertyPath: m_Name
       value: Fire02_Mobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522835503591412, guid: 41ecb733b44c5214fa03fa1463f1f52f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4163757012350828, guid: 41ecb733b44c5214fa03fa1463f1f52f, type: 3}
       propertyPath: m_LocalScale.x

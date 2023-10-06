@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7808079903821641970}
   - component: {fileID: 4784425822655509586}
   - component: {fileID: 3530560409573713812}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8891255127006426514}
   - component: {fileID: 5609221393690147125}
   - component: {fileID: 4572648424100575679}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8e0684d53142ce93ad70b0355ede02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyAfterInSecs: 60
   impactPrefab: {fileID: 4726966518373130, guid: cb1ceab197b21204c8e9e26ec9c6843f, type: 3}
   damage: 10
   _destroyTimeInSecs: 0.2
